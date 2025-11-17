@@ -42,12 +42,17 @@ const Timer = ({ mode, pomodoroSessionCount, onComplete }) => {
 
   return (
     <div>
-      <h1>{mode.name}</h1>
-      <h1>
+      {/* <h1>{mode.name}</h1> */}
+      <h1 className="text-6xl font-bold">
         {minutes.toString().padStart(2, "0")}:
         {seconds.toString().padStart(2, "0")}
       </h1>
-      <button onClick={toggleTimer}>{isRunning ? "Pause" : "Start"}</button>
+      <button
+        className="bg-sky-50 text-red-400 border-2 p-3 rounded-xl font-semibold "
+        onClick={toggleTimer}
+      >
+        {isRunning ? "Pause" : "Start"}
+      </button>
       <p>{`Session Count: ${pomodoroSessionCount}`}</p>
     </div>
   );
