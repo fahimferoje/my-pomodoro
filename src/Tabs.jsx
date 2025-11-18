@@ -14,8 +14,8 @@ export default function Tabs({ active, mode, setActive }) {
           key={tab.id}
           onClick={() => setActive(tab.id)}
           className={`
-            px-5 py-2 rounded-xl font-semibold text-white transition
-            ${active === tab.id ? "bg-zinc-500" : tab.color}
+            px-5 py-2 rounded-xs font-semibold text-white transition
+            ${active === tab.id ? "bg-zinc-500" : ""}
           `}
         >
           {tab.label}
