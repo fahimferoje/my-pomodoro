@@ -6,7 +6,7 @@ export const Mode = Object.freeze({
   POMODORO: {
     id: 0,
     name: "Pomodoro",
-    time: 3,
+    time: 5,
     typography: { themeColor: "bg-red-400", fontColor: "text-red-400" },
   },
   SHORT_BREAK: {
@@ -56,11 +56,17 @@ const PomodoroController = () => {
     }
   };
 
+  const onTabClick = (mode) => {
+    setActive(mode.id);
+    setMode(mode);
+    setThemeColor(mode.typography.themeColor);
+  };
+
   return (
     <div className={`flex justify-center min-h-screen ${themeColor} `}>
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
         <div className="flex flex-col items-center pt-6">
-          <Tabs active={active} mode={mode} setActive={setActive} />
+          <Tabs active={active} onTabClick={onTabClick} setActive={setActive} />
         </div>
         <div className="flex flex-col items-center pt-3">
           <Timer

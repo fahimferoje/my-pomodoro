@@ -14,6 +14,7 @@ const Timer = ({ mode, pomodoroSessionCount, onComplete }) => {
   }, [timeLeft]);
 
   useEffect(() => {
+    clearInterval(timerRef.current);
     setTimeLeft(mode.time);
     setIsRunning(false);
   }, [mode]);
