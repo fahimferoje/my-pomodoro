@@ -1,15 +1,9 @@
-const tabs = [
-  { id: 0, label: "Pomodoro", color: "bg-red-300" },
-  { id: 1, label: "Short Break", color: "bg-red-300" },
-  { id: 2, label: "Long Break", color: "bg-red-300" },
-];
-
-import Mode from "./PomodoroController";
+import { Mode } from "./PomodoroController";
 
 export default function Tabs({ active, mode, setActive }) {
   return (
     <div className="flex gap-3 p-2 rounded-2xl w-fit mx-auto">
-      {tabs.map((tab) => (
+      {Object.values(Mode).map((tab) => (
         <button
           key={tab.id}
           onClick={() => setActive(tab.id)}
@@ -18,7 +12,7 @@ export default function Tabs({ active, mode, setActive }) {
             ${active === tab.id ? "bg-zinc-500" : ""}
           `}
         >
-          {tab.label}
+          {tab.name}
         </button>
       ))}
     </div>

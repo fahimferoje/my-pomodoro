@@ -1,6 +1,5 @@
 import Timer from "./Timer";
 import { useState } from "react";
-import React from "react";
 import Tabs from "./Tabs";
 
 export const Mode = Object.freeze({
@@ -24,38 +23,36 @@ export const Mode = Object.freeze({
   },
 });
 
-const POMODORO_SESSION_COUNT = 3;
+const MAX_POMODORO_SESSION_COUNT = 3;
 
 const PomodoroController = () => {
-  const [mode, setMode] = useState(Mode.POMODORO);
+  const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
+
+  const [mode, setMode] = useState(POMODORO);
   const [pomodoroSessionCount, setPomodoroSessionCount] = useState(1);
-  const [active, setActive] = useState(Mode.POMODORO.id);
-  const [themeColor, setThemeColor] = useState(
-    Mode.POMODORO.typography.themeColor
-  );
+  const [active, setActive] = useState(POMODORO.id);
+  const [themeColor, setThemeColor] = useState(POMODORO.typography.themeColor);
 
   const onComplete = () => {
-    if (pomodoroSessionCount === POMODORO_SESSION_COUNT) {
-      setMode(Mode.LONG_BREAK);
-      setActive(Mode.LONG_BREAK.id);
-      setThemeColor(Mode.LONG_BREAK.typography.themeColor);
+    if (pomodoroSessionCount === MAX_POMODORO_SESSION_COUNT) {
+      setMode(LONG_BREAK);
+      setActive(LONG_BREAK.id);
+      setThemeColor(LONG_BREAK.typography.themeColor);
       setPomodoroSessionCount(1);
       return;
     }
 
-    if (mode === Mode.POMODORO) {
-      setMode(Mode.SHORT_BREAK);
-      setActive(Mode.SHORT_BREAK.id);
-      setThemeColor(Mode.SHORT_BREAK.typography.themeColor);
-    } else if (mode === Mode.SHORT_BREAK) {
-      setPomodoroSessionCount((prev) => prev + 1);
-      setMode(Mode.POMODORO);
-      setActive(Mode.POMODORO.id);
-      setThemeColor(Mode.POMODORO.typography.themeColor);
+    if (mode === POMODORO) {
+      setMode(SHORT_BREAK);
+      setActive(SHORT_BREAK.id);
+      setThemeColor(SHORT_BREAK.typography.themeColor);
     } else {
-      setMode(Mode.POMODORO);
-      setActive(Mode.POMODORO.id);
-      setThemeColor(Mode.POMODORO.typography.themeColor);
+      if (mode === SHORT_BREAK) {
+        setPomodoroSessionCount((prev) => prev + 1);
+      }
+      setMode(POMODORO);
+      setActive(POMODORO.id);
+      setThemeColor(POMODORO.typography.themeColor);
     }
   };
 
