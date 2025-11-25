@@ -3,6 +3,7 @@ import { useState } from "react";
 import Tabs from "./Tabs";
 import PomodoroSessionCount from "./PomodoroSessionCount";
 import TaskName from "./TaskName";
+import Tasks from "./Tasks";
 
 export const Mode = Object.freeze({
   POMODORO: {
@@ -92,9 +93,12 @@ const PomodoroController = () => {
           />
         </div>
       </div>
-      <div className="flex items-center flex-col text-white">
+      <div className="flex items-center flex-col text-white mt-5">
         <PomodoroSessionCount pomodoroSessionCount={pomodoroSessionCount} />
         <TaskName />
+      </div>
+      <div>
+        <Tasks />
       </div>
     </div>
   );
