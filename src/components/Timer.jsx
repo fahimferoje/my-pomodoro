@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const Timer = ({ mode, pomodoroSessionCount, onComplete }) => {
+const Timer = ({ mode, onComplete }) => {
   const [timeLeft, setTimeLeft] = useState(mode.time);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -53,7 +53,6 @@ const Timer = ({ mode, pomodoroSessionCount, onComplete }) => {
       >
         {isRunning ? "PAUSE" : "START"}
       </button>
-      <p>{`Session Count: ${pomodoroSessionCount}`}</p>
     </div>
   );
 };

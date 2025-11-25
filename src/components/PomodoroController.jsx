@@ -1,6 +1,8 @@
 import Timer from "./Timer";
 import { useState } from "react";
 import Tabs from "./Tabs";
+import PomodoroSessionCount from "./PomodoroSessionCount";
+import TaskName from "./TaskName";
 
 export const Mode = Object.freeze({
   POMODORO: {
@@ -76,19 +78,23 @@ const PomodoroController = () => {
 
   return (
     <div
-      className={`flex justify-center min-h-screen ${timerMode.themeColor} `}
+      className={`flex items-center min-h-screen flex-col ${timerMode.themeColor} `}
     >
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
-        <div className="flex flex-col items-center pt-6">
+        <div className="flex flex-col pt-6">
           <Tabs active={timerMode.active} onTabClick={onTabClick} />
         </div>
-        <div className="flex flex-col items-center pt-3">
+        <div className="flex flex-col pt-3">
           <Timer
             mode={timerMode.mode}
             pomodoroSessionCount={pomodoroSessionCount}
             onComplete={onComplete}
           />
         </div>
+      </div>
+      <div className="flex items-center flex-col text-white">
+        <PomodoroSessionCount pomodoroSessionCount={pomodoroSessionCount} />
+        <TaskName />
       </div>
     </div>
   );
