@@ -1,4 +1,4 @@
-import PomodoroController from "./PomodoroController";
+import PomodoroController from "./components/PomodoroController";
 function App() {
   return <PomodoroController />;
 }
