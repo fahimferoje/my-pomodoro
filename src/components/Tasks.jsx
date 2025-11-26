@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import AddTaskPopUp from "./AddTaskPopUp";
 
 const Tasks = () => {
+  const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
+
+  const onAddTaskButtonClick = () => {
+    setShowAddTaskPopUp(true);
+  };
+
   return (
     <div>
       <div
@@ -18,10 +25,14 @@ const Tasks = () => {
       <br />
       <div className="flex flex-col items-center w-md">
         <div className="text-center h-15 border-2 border-dashed border-zinc-50 w-md text-white">
-          <button className="text-center p-0 justify-center">
+          <button
+            className="text-center p-0 justify-center"
+            onClick={onAddTaskButtonClick}
+          >
             <FontAwesomeIcon icon={faCirclePlus} />
             Add Task
           </button>
+          <AddTaskPopUp showAddTaskPopUp={showAddTaskPopUp} />
         </div>
       </div>
     </div>
