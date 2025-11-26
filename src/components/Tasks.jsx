@@ -10,6 +10,12 @@ const Tasks = () => {
     setShowAddTaskPopUp(true);
   };
 
+  const onCancel = () => {
+    setShowAddTaskPopUp(false);
+  };
+
+  const onSave = () => {};
+
   return (
     <div>
       <div
@@ -32,7 +38,11 @@ const Tasks = () => {
             <FontAwesomeIcon icon={faCirclePlus} />
             Add Task
           </button>
-          <AddTaskPopUp showAddTaskPopUp={showAddTaskPopUp} />
+          <AddTaskPopUp
+            showAddTaskPopUp={showAddTaskPopUp}
+            onSave={onSave}
+            onCancel={onCancel}
+          />
         </div>
       </div>
     </div>

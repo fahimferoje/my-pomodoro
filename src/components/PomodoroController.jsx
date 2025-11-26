@@ -79,7 +79,7 @@ const PomodoroController = () => {
 
   return (
     <div
-      className={`flex items-center min-h-screen flex-col ${timerMode.themeColor} `}
+      className={`flex items-center min-h-dvh flex-col ${timerMode.themeColor} `}
     >
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
         <div className="flex flex-col pt-6">
