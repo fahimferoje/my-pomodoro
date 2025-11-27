@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import AddTaskPopUp from "./AddTaskPopUp";
+import TaskRow from "./TaskRow";
+
+const task = {
+  name: null,
+};
 
 const Tasks = () => {
   const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
+  const [tasksList, setTasksList] = useState([]);
+  const [taskName, setTaskName] = useState("");
 
   const onAddTaskButtonClick = () => {
     setShowAddTaskPopUp(true);
@@ -14,7 +21,14 @@ const Tasks = () => {
     setShowAddTaskPopUp(false);
   };
 
-  const onSave = () => {};
+  const onSave = () => {
+    setTasksList([...tasksList, { name: taskName }]);
+    setShowAddTaskPopUp(false);
+  };
+
+  const onInputValueChange = (e) => {
+    setTaskName(e.target.value);
+  };
 
   return (
     <div>
@@ -30,6 +44,8 @@ const Tasks = () => {
       <div className="border-b-4 pt-3 border-zinc-50"></div>
       <br />
       <div className="flex flex-col items-center w-md">
+        {tasksList.length > 0 && <TaskRow tasksList={tasksList} />}
+
         <div className="text-center h-15 border-2 border-dashed border-zinc-50 w-md text-white">
           <button
             className="text-center p-0 justify-center"
@@ -42,6 +58,8 @@ const Tasks = () => {
             showAddTaskPopUp={showAddTaskPopUp}
             onSave={onSave}
             onCancel={onCancel}
+            onInputValueChange={onInputValueChange}
+            taskName={taskName}
           />
         </div>
       </div>

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-const AddTaskPopUp = ({ showAddTaskPopUp, onSave, onCancel }) => {
+const AddTaskPopUp = ({
+  showAddTaskPopUp,
+  onSave,
+  onCancel,
+  onInputValueChange,
+  taskName,
+}) => {
   return (
     <div
-      className={`bg-white rounded-lg w-md h-80 text-black ${
+      className={`bg-white rounded-lg w-md h-60 text-black ${
         showAddTaskPopUp ? `block` : `hidden`
       }`}
     >
@@ -11,18 +17,22 @@ const AddTaskPopUp = ({ showAddTaskPopUp, onSave, onCancel }) => {
         className="shadow w-full py-5 px-5 text-gray-700 mt-5 focus:outline-none"
         type="text"
         placeholder="What are you working on?"
+        value={taskName}
+        onChange={onInputValueChange}
       />
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-5 mr-5">
         <button
           className="font-semibold text-[#9e9e9e] shadow-none hover:text-[#636363] px-4 text-[14px] 
-        min-h-[36px] min-w-[74px] rounded-[9px] cursor-pointer"
+        min-h-9 min-w-[74px] rounded-[9px] cursor-pointer"
           onClick={onCancel}
         >
           Cancel
         </button>
         <button
-          className="bg-[#45474b] font-semibold min-h-[36px] min-w-[74px] rounded-[9px] 
-        cursor-pointer hover:bg-[#535356] px-4 text-[14px] text-white"
+          className="bg-[#45474b] font-semibold min-h-9 
+          min-w-[74px] rounded-[9px] 
+        cursor-pointer hover:bg-[#535356] 
+        px-4 text-[14px] text-white"
           onClick={onSave}
         >
           Save
