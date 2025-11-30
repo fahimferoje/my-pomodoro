@@ -4,9 +4,9 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import AddTaskPopUp from "./AddTaskPopUp";
 import TaskRow from "./TaskRow";
 
-const task = {
-  name: null,
-};
+// const task = {
+//   name: "demo task",
+// };
 
 const Tasks = () => {
   const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
@@ -15,6 +15,7 @@ const Tasks = () => {
 
   const onAddTaskButtonClick = () => {
     setShowAddTaskPopUp(true);
+    setTaskName("");
   };
 
   const onCancel = () => {
@@ -24,6 +25,7 @@ const Tasks = () => {
   const onSave = () => {
     setTasksList([...tasksList, { name: taskName }]);
     setShowAddTaskPopUp(false);
+    setTaskName("");
   };
 
   const onInputValueChange = (e) => {
@@ -43,9 +45,9 @@ const Tasks = () => {
       </div>
       <div className="border-b-4 pt-3 border-zinc-50"></div>
       <br />
-      <div className="flex flex-col items-center w-md">
-        {tasksList.length > 0 && <TaskRow tasksList={tasksList} />}
 
+      <div className="flex flex-col items-center w-md space-y-2">
+        {tasksList.length > 0 && <TaskRow tasksList={tasksList} />}
         <div className="text-center h-15 border-2 border-dashed border-zinc-50 w-md text-white">
           <button
             className="text-center p-0 justify-center"
