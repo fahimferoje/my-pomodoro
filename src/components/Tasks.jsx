@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import AddTaskPopUp from "./AddTaskPopUp";
 import TaskRow from "./TaskRow";
-
-// const task = {
-//   name: "demo task",
-// };
+import TaskTitle from "./TaskTitle";
 
 const Tasks = () => {
   const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
   const [tasksList, setTasksList] = useState([]);
   const [taskName, setTaskName] = useState("");
+  const [taskTitle, setTaskTitle] = useState("Time to focus!");
+
+  const [taskNameTheme, setTaskNameTheme] = useState({
+    iconBgColor: "",
+    textDecoration: "",
+  });
 
   const onAddTaskButtonClick = () => {
     setShowAddTaskPopUp(true);
@@ -23,8 +26,11 @@ const Tasks = () => {
   };
 
   const onSave = () => {
+    if (!taskName) {
+      return;
+    }
+
     setTasksList([...tasksList, { name: taskName }]);
-    setShowAddTaskPopUp(false);
     setTaskName("");
   };
 
@@ -32,8 +38,22 @@ const Tasks = () => {
     setTaskName(e.target.value);
   };
 
+  const onTaskCheck = (e) => {
+    setTaskNameTheme({
+      iconBgColor: "text-red-400",
+      textDecoration: "line-through",
+    });
+  };
+
+  const onTaskNameClick = (e) => {
+    setTaskTitle(e.target.innerText);
+  };
+
   return (
     <div>
+      <div className="text-center text-white text-lg">
+        <TaskTitle taskTitle={taskTitle} />
+      </div>
       <div
         className="flex flex-row text-white mt-5 w-md 
                   justify-between"
@@ -47,7 +67,14 @@ const Tasks = () => {
       <br />
 
       <div className="flex flex-col items-center w-md space-y-2">
-        {tasksList.length > 0 && <TaskRow tasksList={tasksList} />}
+        {tasksList.length > 0 && (
+          <TaskRow
+            tasksList={tasksList}
+            onTaskCheck={onTaskCheck}
+            onTaskNameClick={onTaskNameClick}
+            taskNameTheme={taskNameTheme}
+          />
+        )}
         <div className="text-center h-15 border-2 border-dashed border-zinc-50 w-md text-white">
           <button
             className="text-center p-0 justify-center"

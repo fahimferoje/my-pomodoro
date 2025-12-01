@@ -2,7 +2,7 @@ import Timer from "./Timer";
 import { useState } from "react";
 import Tabs from "./Tabs";
 import PomodoroSessionCount from "./PomodoroSessionCount";
-import TaskName from "./TaskName";
+//import TaskName from "./TaskTitle";
 import Tasks from "./Tasks";
 
 export const Mode = Object.freeze({
@@ -95,7 +95,7 @@ const PomodoroController = () => {
       </div>
       <div className="flex items-center flex-col text-white mt-5">
         <PomodoroSessionCount pomodoroSessionCount={pomodoroSessionCount} />
-        <TaskName />
+        {/* <TaskName /> */}
       </div>
       <div>
         <Tasks />
