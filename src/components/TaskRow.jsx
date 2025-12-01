@@ -5,7 +5,7 @@ const TaskRow = ({
   tasksList,
   onTaskCheck,
   onTaskNameClick,
-  taskNameTheme: { iconBgColor, textDecoration },
+  taskRowData: { iconBgColor, textDecoration },
 }) => {
   return (
     <>

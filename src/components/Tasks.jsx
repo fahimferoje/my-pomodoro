@@ -8,17 +8,23 @@ import TaskTitle from "./TaskTitle";
 const Tasks = () => {
   const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
   const [tasksList, setTasksList] = useState([]);
-  const [taskName, setTaskName] = useState("");
-  const [taskTitle, setTaskTitle] = useState("Time to focus!");
 
-  const [taskNameTheme, setTaskNameTheme] = useState({
+  const [taskRowData, setTaskRowData] = useState({
+    taskName: "",
+    taskTitle: "Time to focus!",
+    checked: false,
     iconBgColor: "",
     textDecoration: "",
   });
 
   const onAddTaskButtonClick = () => {
     setShowAddTaskPopUp(true);
-    setTaskName("");
+    setTaskRowData((prevState) => {
+      return {
+        ...prevState,
+        taskName: "",
+      };
+    });
   };
 
   const onCancel = () => {
@@ -26,33 +32,53 @@ const Tasks = () => {
   };
 
   const onSave = () => {
-    if (!taskName) {
+    if (!taskRowData.taskName) {
       return;
     }
 
-    setTasksList([...tasksList, { name: taskName }]);
-    setTaskName("");
+    setTasksList([...tasksList, { name: taskRowData.taskName }]);
+
+    setTaskRowData((prevState) => {
+      return {
+        ...prevState,
+        taskName: "",
+      };
+    });
   };
 
   const onInputValueChange = (e) => {
-    setTaskName(e.target.value);
+    setTaskRowData((prevState) => {
+      return {
+        ...prevState,
+        taskName: e.target.value,
+      };
+    });
   };
 
-  const onTaskCheck = (e) => {
-    setTaskNameTheme({
-      iconBgColor: "text-red-400",
-      textDecoration: "line-through",
+  const onTaskCheck = () => {
+    setTaskRowData((prevState) => {
+      return {
+        ...prevState,
+        checked: !prevState.checked,
+        iconBgColor: prevState.checked ? "" : "text-red-400",
+        textDecoration: prevState.checked ? "" : "line-through",
+      };
     });
   };
 
   const onTaskNameClick = (e) => {
-    setTaskTitle(e.target.innerText);
+    setTaskRowData((prevState) => {
+      return {
+        ...prevState,
+        taskTitle: e.target.innerText,
+      };
+    });
   };
 
   return (
     <div>
       <div className="text-center text-white text-lg">
-        <TaskTitle taskTitle={taskTitle} />
+        <TaskTitle taskTitle={taskRowData.taskTitle} />
       </div>
       <div
         className="flex flex-row text-white mt-5 w-md 
@@ -72,14 +98,11 @@ const Tasks = () => {
             tasksList={tasksList}
             onTaskCheck={onTaskCheck}
             onTaskNameClick={onTaskNameClick}
-            taskNameTheme={taskNameTheme}
+            taskRowData={taskRowData}
           />
         )}
         <div className="text-center h-15 border-2 border-dashed border-zinc-50 w-md text-white">
-          <button
-            className="text-center p-0 justify-center"
-            onClick={onAddTaskButtonClick}
-          >
+          <button className="p-0" onClick={onAddTaskButtonClick}>
             <FontAwesomeIcon icon={faCirclePlus} />
             Add Task
           </button>
@@ -88,7 +111,7 @@ const Tasks = () => {
             onSave={onSave}
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
-            taskName={taskName}
+            taskName={taskRowData.taskName}
           />
         </div>
       </div>
