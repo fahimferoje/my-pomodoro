@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCirclePlus,
+  faEllipsisVertical,
+} from "@fortawesome/free-solid-svg-icons";
 import AddTaskPopUp from "./AddTaskPopUp";
 import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
 
 const Tasks = () => {
   const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
+  const [showAddTaskButton, setShowAddTaskButton] = useState(true);
   const [tasksList, setTasksList] = useState([]);
 
   const [taskRowData, setTaskRowData] = useState({
@@ -19,6 +23,7 @@ const Tasks = () => {
 
   const onAddTaskButtonClick = () => {
     setShowAddTaskPopUp(true);
+    setShowAddTaskButton(false);
     setTaskRowData((prevState) => {
       return {
         ...prevState,
@@ -29,6 +34,7 @@ const Tasks = () => {
 
   const onCancel = () => {
     setShowAddTaskPopUp(false);
+    setShowAddTaskButton(true);
   };
 
   const onSave = () => {
@@ -85,9 +91,7 @@ const Tasks = () => {
                   justify-between"
       >
         <h1 className="">Tasks</h1>
-        <div className="">
-          <h1>Icon</h1>
-        </div>
+        <FontAwesomeIcon icon={faEllipsisVertical} />
       </div>
       <div className="border-b-4 pt-3 border-zinc-50"></div>
       <br />
@@ -101,11 +105,17 @@ const Tasks = () => {
             taskRowData={taskRowData}
           />
         )}
-        <div className="text-center h-15 border-2 border-dashed border-zinc-50 w-md text-white">
-          <button className="p-0" onClick={onAddTaskButtonClick}>
-            <FontAwesomeIcon icon={faCirclePlus} />
+        <div
+          className={`flex items-center justify-center gap-1
+             text-center h-15 border-2 border-dashed border-zinc-50
+             w-md text-white ${showAddTaskButton ? `block` : `hidden`}`}
+        >
+          <FontAwesomeIcon icon={faCirclePlus} />
+          <button className="not-last:p-0" onClick={onAddTaskButtonClick}>
             Add Task
           </button>
+        </div>
+        <div>
           <AddTaskPopUp
             showAddTaskPopUp={showAddTaskPopUp}
             onSave={onSave}

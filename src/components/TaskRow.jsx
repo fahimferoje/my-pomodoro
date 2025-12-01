@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleCheck,
+  faEllipsisVertical,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TaskRow = ({
   tasksList,
@@ -16,10 +19,13 @@ const TaskRow = ({
             className={`text-2xl ${iconBgColor}`}
             icon={faCircleCheck}
           />
-          <div className={`font-semibold pl-2`}>
+          <div className={`font-semibold pl-2 basis-2/3`}>
             <button className={textDecoration} onClick={onTaskNameClick}>
               {task.name}
             </button>
+          </div>
+          <div className="basis-1/3">
+            <FontAwesomeIcon icon={faEllipsisVertical} />
           </div>
         </div>
       ))}
