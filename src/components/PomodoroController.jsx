@@ -3,7 +3,7 @@ import { useState } from "react";
 import Tabs from "./Tabs";
 import PomodoroSessionCount from "./PomodoroSessionCount";
 //import TaskName from "./TaskTitle";
-import Tasks from "./Tasks";
+import Tasks from "../components/tasks/Tasks";
 
 export const Mode = Object.freeze({
   POMODORO: {
