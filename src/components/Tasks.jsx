@@ -9,9 +9,12 @@ import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
 
 const Tasks = () => {
-  const [showAddTaskPopUp, setShowAddTaskPopUp] = useState(false);
-  const [showAddTaskButton, setShowAddTaskButton] = useState(true);
   const [tasksList, setTasksList] = useState([]);
+
+  const [showAddTaskUIComponent, setShowAddTaskUIComponent] = useState({
+    showAddTaskPopUp: false,
+    showAddTaskButton: true,
+  });
 
   const [taskRowData, setTaskRowData] = useState({
     taskName: "",
@@ -22,8 +25,11 @@ const Tasks = () => {
   });
 
   const onAddTaskButtonClick = () => {
-    setShowAddTaskPopUp(true);
-    setShowAddTaskButton(false);
+    setShowAddTaskUIComponent({
+      showAddTaskPopUp: true,
+      showAddTaskButton: false,
+    });
+
     setTaskRowData((prevState) => {
       return {
         ...prevState,
@@ -33,8 +39,10 @@ const Tasks = () => {
   };
 
   const onCancel = () => {
-    setShowAddTaskPopUp(false);
-    setShowAddTaskButton(true);
+    setShowAddTaskUIComponent({
+      showAddTaskPopUp: false,
+      showAddTaskButton: true,
+    });
   };
 
   const onSave = () => {
@@ -108,7 +116,9 @@ const Tasks = () => {
         <div
           className={`flex items-center justify-center gap-1
              text-center h-15 border-2 border-dashed border-zinc-50
-             w-md text-white ${showAddTaskButton ? `block` : `hidden`}`}
+             w-md text-white ${
+               showAddTaskUIComponent.showAddTaskButton ? `block` : `hidden`
+             }`}
         >
           <FontAwesomeIcon icon={faCirclePlus} />
           <button className="not-last:p-0" onClick={onAddTaskButtonClick}>
@@ -117,7 +127,7 @@ const Tasks = () => {
         </div>
         <div>
           <AddTaskPopUp
-            showAddTaskPopUp={showAddTaskPopUp}
+            showAddTaskPopUp={showAddTaskUIComponent.showAddTaskPopUp}
             onSave={onSave}
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
