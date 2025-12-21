@@ -22,6 +22,7 @@ const Tasks = () => {
     checked: false,
     iconBgColor: "",
     textDecoration: "",
+    estimatedPomodoroCount: 1,
   });
 
   const onAddTaskButtonClick = () => {
@@ -132,6 +133,7 @@ const Tasks = () => {
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
             taskName={taskRowData.taskName}
+            estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
           />
         </div>
       </div>

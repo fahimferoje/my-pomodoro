@@ -32,7 +32,7 @@ const TaskRow = ({
           </div>
           <div
             className="w-30 bg-white text-center 
-          basis-12 border-1 border-[#dfdfdf] mr-3 
+          basis-12 border border-[#dfdfdf] mr-3 
           cursor-pointer hover:bg-[#dfdfdf]"
           >
             <FontAwesomeIcon className="" icon={faEllipsisVertical} />
