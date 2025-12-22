@@ -121,8 +121,15 @@ const Tasks = () => {
                showAddTaskUIComponent.showAddTaskButton ? `block` : `hidden`
              }`}
         >
-          <FontAwesomeIcon icon={faCirclePlus} />
-          <button className="not-last:p-0" onClick={onAddTaskButtonClick}>
+          <FontAwesomeIcon
+            className="cursor-pointer"
+            icon={faCirclePlus}
+            onClick={onAddTaskButtonClick}
+          />
+          <button
+            className="not-last:p-0 cursor-pointer"
+            onClick={onAddTaskButtonClick}
+          >
             Add Task
           </button>
         </div>
@@ -133,6 +140,7 @@ const Tasks = () => {
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
             taskName={taskRowData.taskName}
+            setTaskRowData={setTaskRowData}
             estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
           />
         </div>

@@ -6,6 +6,7 @@ const AddTaskPopUp = ({
   onCancel,
   onInputValueChange,
   taskName,
+  setTaskRowData,
   estimatedPomodoroCount,
 }) => {
   return (
@@ -21,7 +22,10 @@ const AddTaskPopUp = ({
         value={taskName}
         onChange={onInputValueChange}
       />
-      <EstimatedPomodoros estimatedPomodoroCount={estimatedPomodoroCount} />
+      <EstimatedPomodoros
+        setTaskRowData={setTaskRowData}
+        estimatedPomodoroCount={estimatedPomodoroCount}
+      />
       <div className="flex justify-end mt-5 mr-5">
         <button
           className="font-semibold text-[#9e9e9e] shadow-none hover:text-[#636363] px-4 text-[14px] 
