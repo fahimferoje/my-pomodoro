@@ -23,14 +23,10 @@ const EstimatedPomodoros = ({ setTaskRowData, estimatedPomodoroCount }) => {
   const onValueChange = (e) => {
     const value = parseInt(e.target.value);
 
-    if (!value) {
-      return;
-    }
-
     setTaskRowData((prevState) => {
       return {
         ...prevState,
-        estimatedPomodoroCount: value,
+        estimatedPomodoroCount: !value ? "" : value,
       };
     });
   };

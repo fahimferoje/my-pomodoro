@@ -44,6 +44,14 @@ const Tasks = () => {
       showAddTaskPopUp: false,
       showAddTaskButton: true,
     });
+
+    setTaskRowData((prevState) => {
+      return {
+        ...prevState,
+        taskName: "",
+        estimatedPomodoroCount: 1,
+      };
+    });
   };
 
   const onSave = () => {
@@ -51,12 +59,19 @@ const Tasks = () => {
       return;
     }
 
-    setTasksList([...tasksList, { name: taskRowData.taskName }]);
+    setTasksList([
+      ...tasksList,
+      {
+        name: taskRowData.taskName,
+        estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
+      },
+    ]);
 
     setTaskRowData((prevState) => {
       return {
         ...prevState,
         taskName: "",
+        estimatedPomodoroCount: 1,
       };
     });
   };

@@ -28,7 +28,7 @@ const TaskRow = ({
             </button>
           </div>
           <div className="basis-24 font-semibold mr-3">
-            <h1 className="text-center">0/3</h1>
+            <h1 className="text-center">{`0/${task.estimatedPomodoroCount}`}</h1>
           </div>
           <div
             className="w-30 bg-white text-center 
