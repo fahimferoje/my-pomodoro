@@ -3,15 +3,26 @@ import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const EstimatedPomodoros = ({ setTaskRowData, estimatedPomodoroCount }) => {
   const onIncrement = () => {
+    const countValue = parseInt(prevState.estimatedPomodoroCount);
+
+    if (!countValue) {
+      return;
+    }
     setTaskRowData((prevState) => {
       return {
         ...prevState,
-        estimatedPomodoroCount: prevState.estimatedPomodoroCount + 1,
+        estimatedPomodoroCount: countValue + 1,
       };
     });
   };
 
   const onDecrement = () => {
+    const countValue = parseInt(prevState.estimatedPomodoroCount);
+
+    if (!countValue) {
+      return;
+    }
+
     setTaskRowData((prevState) => {
       return {
         ...prevState,
