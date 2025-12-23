@@ -98,7 +98,7 @@ const PomodoroController = () => {
         {/* <TaskName /> */}
       </div>
       <div>
-        <Tasks />
+        <Tasks pomodoroSessionCount={pomodoroSessionCount} />
       </div>
     </div>
   );

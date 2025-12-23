@@ -8,8 +8,11 @@ import AddTaskPopUp from "./AddTaskPopUp";
 import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
 
-const Tasks = () => {
+const Tasks = ({ pomodoroSessionCount }) => {
   const [tasksList, setTasksList] = useState([]);
+
+  const [taskTitleHeading, setTaskTitleHeading] = useState("Time to focus!");
+  const [activeTask, setActiveTask] = useState(null);
 
   const [showAddTaskUIComponent, setShowAddTaskUIComponent] = useState({
     showAddTaskPopUp: false,
@@ -18,11 +21,11 @@ const Tasks = () => {
 
   const [taskRowData, setTaskRowData] = useState({
     taskName: "",
-    taskTitle: "Time to focus!",
     checked: false,
     iconBgColor: "",
     textDecoration: "",
     estimatedPomodoroCount: 1,
+    localPomodoroSessionCount: 0,
   });
 
   const onAddTaskButtonClick = () => {
@@ -59,11 +62,17 @@ const Tasks = () => {
       return;
     }
 
+    if (activeTask === null) {
+      setTaskTitleHeading(taskRowData.taskName);
+      setActiveTask(taskRowData);
+    }
+
     setTasksList([
       ...tasksList,
       {
-        name: taskRowData.taskName,
+        taskName: taskRowData.taskName,
         estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
+        localPomodoroSessionCount: taskRowData.localPomodoroSessionCount,
       },
     ]);
 
@@ -96,19 +105,15 @@ const Tasks = () => {
     });
   };
 
-  const onTaskNameClick = (e) => {
-    setTaskRowData((prevState) => {
-      return {
-        ...prevState,
-        taskTitle: e.target.innerText,
-      };
-    });
+  const onTaskNameClick = (task) => {
+    setTaskTitleHeading(task.taskName);
+    setActiveTask(task);
   };
 
   return (
     <div>
       <div className="text-center text-white text-lg">
-        <TaskTitle taskTitle={taskRowData.taskTitle} />
+        <TaskTitle taskTitleHeading={taskTitleHeading} />
       </div>
       <div
         className="flex flex-row text-white mt-5 w-md 

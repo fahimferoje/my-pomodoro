@@ -22,13 +22,13 @@ const TaskRow = ({
           <div className={`font-semibold pl-2 basis-3xl cursor-pointer`}>
             <button
               className={`text-left cursor-pointer w-full ${textDecoration}`}
-              onClick={onTaskNameClick}
+              onClick={() => onTaskNameClick(task)}
             >
               {task.name}
             </button>
           </div>
           <div className="basis-24 font-semibold mr-3">
-            <h1 className="text-center">{`0/${task.estimatedPomodoroCount}`}</h1>
+            <h1 className="text-center">{`${task.localPomodoroSessionCount}/${task.estimatedPomodoroCount}`}</h1>
           </div>
           <div
             className="w-30 bg-white text-center 
