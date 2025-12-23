@@ -86,11 +86,7 @@ const PomodoroController = () => {
           <Tabs active={timerMode.active} onTabClick={onTabClick} />
         </div>
         <div className="flex flex-col pt-3">
-          <Timer
-            mode={timerMode.mode}
-            pomodoroSessionCount={pomodoroSessionCount}
-            onComplete={onComplete}
-          />
+          <Timer mode={timerMode.mode} onComplete={onComplete} />
         </div>
       </div>
       <div className="flex items-center flex-col text-white mt-5">
