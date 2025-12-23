@@ -24,7 +24,7 @@ const TaskRow = ({
               className={`text-left cursor-pointer w-full ${textDecoration}`}
               onClick={() => onTaskNameClick(task)}
             >
-              {task.name}
+              {task.taskName}
             </button>
           </div>
           <div className="basis-24 font-semibold mr-3">
