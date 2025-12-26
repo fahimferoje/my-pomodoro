@@ -2,7 +2,6 @@ import Timer from "./Timer";
 import { useState } from "react";
 import Tabs from "./Tabs";
 import PomodoroSessionCount from "./PomodoroSessionCount";
-//import TaskName from "./TaskTitle";
 import Tasks from "../components/tasks/Tasks";
 
 export const Mode = Object.freeze({
@@ -156,6 +155,24 @@ const PomodoroController = () => {
         mode: SHORT_BREAK,
         active: SHORT_BREAK.id,
         themeColor: SHORT_BREAK.typography.themeColor,
+      });
+
+      setTasksList((prevList) => {
+        let updatedTask;
+
+        const updatedList = prevList.map((task) => {
+          if (task.taskName === activeTask.taskName) {
+            updatedTask = {
+              ...task,
+              localPomodoroSessionCount: task.localPomodoroSessionCount + 1,
+            };
+
+            return updatedTask;
+          }
+          return task;
+        });
+        setActiveTask(updatedTask);
+        return updatedList;
       });
     } else {
       if (timerMode.mode === SHORT_BREAK) {
