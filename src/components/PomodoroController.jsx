@@ -218,15 +218,12 @@ const PomodoroController = () => {
           onTaskCheck={onTaskCheck}
           onTaskNameClick={onTaskNameClick}
           taskRowData={taskRowData}
+          setTaskRowData={setTaskRowData}
           showAddTaskUIComponent={showAddTaskUIComponent}
           onAddTaskButtonClick={onAddTaskButtonClick}
-          showAddTaskPopUp={showAddTaskUIComponent.showAddTaskPopUp}
           onSave={onSave}
           onCancel={onCancel}
           onInputValueChange={onInputValueChange}
-          taskName={taskRowData.taskName}
-          setTaskRowData={setTaskRowData}
-          estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
         />
       </div>
     </div>

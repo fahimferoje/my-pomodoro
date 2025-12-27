@@ -14,15 +14,12 @@ const Tasks = ({
   onTaskCheck,
   onTaskNameClick,
   taskRowData,
-  showAddTaskUIComponent,
+  setTaskRowData,
+  showAddTaskUIComponent: { showAddTaskPopUp, showAddTaskButton },
   onAddTaskButtonClick,
-  showAddTaskPopUp,
   onSave,
   onCancel,
   onInputValueChange,
-  taskName,
-  setTaskRowData,
-  estimatedPomodoroCount,
 }) => {
   return (
     <div>
@@ -51,9 +48,7 @@ const Tasks = ({
         <div
           className={`flex items-center justify-center gap-1
              text-center h-15 border-2 border-dashed border-zinc-50
-             w-md text-white ${
-               showAddTaskUIComponent.showAddTaskButton ? `block` : `hidden`
-             }`}
+             w-md text-white ${showAddTaskButton ? `block` : `hidden`}`}
         >
           <FontAwesomeIcon
             className="cursor-pointer"
@@ -73,9 +68,9 @@ const Tasks = ({
             onSave={onSave}
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
-            taskName={taskName}
+            taskName={taskRowData.taskName}
             setTaskRowData={setTaskRowData}
-            estimatedPomodoroCount={estimatedPomodoroCount}
+            estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
           />
         </div>
       </div>
