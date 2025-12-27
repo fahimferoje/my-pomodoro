@@ -1,9 +1,9 @@
-import { Mode } from "./PomodoroController";
+import { usePomodoroMode } from "../components/hooks/usePomodoroMode.js";
 
 export default function Tabs({ active, onTabClick }) {
   return (
     <div className="flex gap-3 p-2 rounded-2xl w-fit mx-auto">
-      {Object.values(Mode).map((tab) => (
+      {Object.values(usePomodoroMode()).map((tab) => (
         <button
           key={tab.id}
           onClick={() => onTabClick(tab)}
