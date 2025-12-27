@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCirclePlus,
-  faEllipsisVertical,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import AddTaskPopUp from "./AddTaskPopUp";
 import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
+import AddTaskSection from "./AddTaskSection";
 
 const Tasks = ({
   taskTitleHeading,
@@ -45,23 +43,10 @@ const Tasks = ({
             taskRowData={taskRowData}
           />
         )}
-        <div
-          className={`flex items-center justify-center gap-1
-             text-center h-15 border-2 border-dashed border-zinc-50
-             w-md text-white ${showAddTaskButton ? `block` : `hidden`}`}
-        >
-          <FontAwesomeIcon
-            className="cursor-pointer"
-            icon={faCirclePlus}
-            onClick={onAddTaskButtonClick}
-          />
-          <button
-            className="not-last:p-0 cursor-pointer"
-            onClick={onAddTaskButtonClick}
-          >
-            Add Task
-          </button>
-        </div>
+        <AddTaskSection
+          showAddTaskButton={showAddTaskButton}
+          onAddTaskButtonClick={onAddTaskButtonClick}
+        />
         <div>
           <AddTaskPopUp
             showAddTaskPopUp={showAddTaskPopUp}

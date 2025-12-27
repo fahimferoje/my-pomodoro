@@ -132,11 +132,11 @@ const PomodoroController = () => {
         <Tasks
           taskTitleHeading={taskTitleHeading}
           tasksList={tasksList}
+          showAddTaskUIComponent={showAddTaskUIComponent}
+          taskRowData={taskRowData}
           onTaskCheck={onTaskCheck}
           onTaskNameClick={onTaskNameClick}
-          taskRowData={taskRowData}
           setTaskRowData={setTaskRowData}
-          showAddTaskUIComponent={showAddTaskUIComponent}
           onAddTaskButtonClick={onAddTaskButtonClick}
           onSave={onSave}
           onCancel={onCancel}
