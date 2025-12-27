@@ -4,12 +4,12 @@ import Tabs from "./Tabs";
 import PomodoroSessionCount from "./PomodoroSessionCount";
 import Tasks from "../components/tasks/Tasks";
 import { useTasks } from "../components/hooks/useTasks.js";
-import { usePomodoroMode } from "../components/hooks/usePomodoroMode.js";
+import { Mode } from "../components/constants/PomodoroMode.js";
 
 const MAX_POMODORO_SESSION_COUNT = 3;
 
 const PomodoroController = () => {
-  const { POMODORO, SHORT_BREAK, LONG_BREAK } = usePomodoroMode();
+  const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
 
   const [timerMode, setTimerMode] = useState({
     mode: POMODORO,
