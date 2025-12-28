@@ -1,6 +1,6 @@
 import Timer from "./Timer";
 import Tabs from "./Tabs";
-import PomodoroSessionCount from "./PomodoroSessionCount";
+import TotalCompletedPomodorosCount from "./TotalCompletedPomodorosCount.jsx";
 import Tasks from "../components/tasks/Tasks";
 import { useTasks } from "../components/hooks/useTasks.js";
 import { usePomodoroTimer } from "../components/hooks/usePomodoroTimer.js";
@@ -23,7 +23,7 @@ const PomodoroController = () => {
     setTasksList,
   } = useTasks();
 
-  const { onComplete, onTabClick, pomodoroSessionCount, timerMode } =
+  const { onComplete, onTabClick, totalCompletedPomodoros, timerMode } =
     usePomodoroTimer(activeTask, setActiveTask, setTasksList);
 
   return (
@@ -39,7 +39,9 @@ const PomodoroController = () => {
         </div>
       </div>
       <div className="flex items-center flex-col text-white mt-5">
-        <PomodoroSessionCount pomodoroSessionCount={pomodoroSessionCount} />
+        <TotalCompletedPomodorosCount
+          totalCompletedPomodoros={totalCompletedPomodoros}
+        />
       </div>
       <div>
         <Tasks

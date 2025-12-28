@@ -8,12 +8,14 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
 
   const [timerMode, setTimerMode] = useState(POMODORO);
 
-  const [pomodoroSessionCount, setPomodoroSessionCount] = useState(1);
+  const [totalCompletedPomodoros, setTotalCompletedPomodoros] = useState(1);
+
+  const [completedPomodoros, setCompletedPomodoros] = useState(1);
 
   const onComplete = () => {
-    if (pomodoroSessionCount === MAX_POMODORO_SESSION_COUNT) {
+    if (completedPomodoros % MAX_POMODORO_SESSION_COUNT === 0) {
       setTimerMode(LONG_BREAK);
-      setPomodoroSessionCount(1);
+      setCompletedPomodoros(1);
       return;
     }
 
@@ -44,7 +46,8 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
       });
     } else {
       if (timerMode === SHORT_BREAK) {
-        setPomodoroSessionCount((prev) => prev + 1);
+        setTotalCompletedPomodoros((prev) => prev + 1);
+        setCompletedPomodoros((prev) => prev + 1);
       }
 
       setTimerMode(POMODORO);
@@ -58,7 +61,7 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
   return {
     onComplete,
     onTabClick,
-    pomodoroSessionCount,
+    totalCompletedPomodoros,
     timerMode,
   };
 };
