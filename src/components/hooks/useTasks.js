@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { getRandomInt } from "../constants/RandomIntGenerator";
 
 export const useTasks = () => {
   const [taskRowData, setTaskRowData] = useState({
+    key: null,
     taskName: "",
     checked: false,
     iconBgColor: "",
@@ -62,6 +64,7 @@ export const useTasks = () => {
     setTasksList([
       ...tasksList,
       {
+        key: getRandomInt(),
         taskName: taskRowData.taskName,
         estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
         localPomodoroSessionCount: taskRowData.localPomodoroSessionCount,

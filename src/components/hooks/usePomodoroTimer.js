@@ -21,20 +21,25 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
       setTimerMode(SHORT_BREAK);
 
       setTasksList((prevList) => {
-        let updatedTask;
+        if (!activeTask) {
+          return prevList;
+        }
+
+        let updatedTask = null;
 
         const updatedList = prevList.map((task) => {
-          if (task.taskName === activeTask.taskName) {
+          if (task.key === activeTask.key) {
             updatedTask = {
               ...task,
               localPomodoroSessionCount: task.localPomodoroSessionCount + 1,
             };
-
             return updatedTask;
           }
           return task;
         });
-        setActiveTask(updatedTask);
+        if (updatedTask) {
+          setActiveTask(updatedTask);
+        }
         return updatedList;
       });
     } else {
