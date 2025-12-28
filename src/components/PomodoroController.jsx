@@ -28,14 +28,14 @@ const PomodoroController = () => {
 
   return (
     <div
-      className={`flex items-center min-h-dvh flex-col ${timerMode.themeColor} `}
+      className={`flex items-center min-h-dvh flex-col ${timerMode.typography.themeColor} `}
     >
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
         <div className="flex flex-col pt-6">
-          <Tabs active={timerMode.active} onTabClick={onTabClick} />
+          <Tabs active={timerMode.id} onTabClick={onTabClick} />
         </div>
         <div className="flex flex-col pt-3">
-          <Timer mode={timerMode.mode} onComplete={onComplete} />
+          <Timer mode={timerMode} onComplete={onComplete} />
         </div>
       </div>
       <div className="flex items-center flex-col text-white mt-5">
