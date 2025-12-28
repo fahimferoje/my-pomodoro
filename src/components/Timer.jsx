@@ -1,7 +1,10 @@
-import { useTimer } from "./hooks/useTimer.js";
+import { useCountDownTimer } from "./hooks/useCountDownTimer.js";
 
 const Timer = ({ mode, onComplete }) => {
-  const { timeLeft, toggleTimer, isRunning } = useTimer(mode, onComplete);
+  const { timeLeft, toggleTimer, isRunning } = useCountDownTimer(
+    mode,
+    onComplete
+  );
 
   return (
     <div className="flex flex-col items-center">
