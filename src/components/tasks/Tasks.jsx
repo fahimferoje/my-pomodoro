@@ -17,6 +17,7 @@ const Tasks = ({
   onSave,
   onCancel,
   onInputValueChange,
+  onTaskEdit,
 }) => {
   return (
     <div>
@@ -40,6 +41,7 @@ const Tasks = ({
             onTaskCheck={onTaskCheck}
             onTaskNameClick={onTaskNameClick}
             taskRowData={taskRowData}
+            onTaskEdit={onTaskEdit}
           />
         )}
         <AddTaskSection
@@ -52,7 +54,7 @@ const Tasks = ({
             onSave={onSave}
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
-            taskName={taskRowData.taskName}
+            taskRowData={taskRowData}
             setTaskRowData={setTaskRowData}
             estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
           />

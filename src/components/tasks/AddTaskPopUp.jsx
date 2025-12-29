@@ -5,7 +5,7 @@ const AddTaskPopUp = ({
   onSave,
   onCancel,
   onInputValueChange,
-  taskName,
+  taskRowData,
   setTaskRowData,
   estimatedPomodoroCount,
 }) => {
@@ -19,7 +19,7 @@ const AddTaskPopUp = ({
         className="shadow w-full py-5 px-5 text-gray-700 mt-5 focus:outline-none"
         type="text"
         placeholder="What are you working on?"
-        value={taskName}
+        value={taskRowData.taskName}
         onChange={onInputValueChange}
       />
       <EstimatedPomodoros

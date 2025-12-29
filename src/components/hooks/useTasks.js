@@ -28,11 +28,14 @@ export const useTasks = () => {
       showAddTaskButton: false,
     });
 
-    setTaskRowData((prevState) => {
-      return {
-        ...prevState,
-        taskName: "",
-      };
+    setTaskRowData({
+      key: null,
+      taskName: "",
+      checked: false,
+      iconBgColor: "",
+      textDecoration: "",
+      estimatedPomodoroCount: 1,
+      localPomodoroSessionCount: 0,
     });
   };
 
@@ -59,6 +62,25 @@ export const useTasks = () => {
     if (activeTask === null) {
       setTaskTitleHeading(taskRowData.taskName);
       setActiveTask(taskRowData);
+    }
+
+    //edit mode
+    if (taskRowData.key && tasksList.length !== 0) {
+      const updatedTask = { ...taskRowData };
+
+      const updatedTasks = tasksList.map((task) =>
+        task.key === taskRowData.key ? updatedTask : task
+      );
+
+      setTasksList(updatedTasks);
+      setTaskTitleHeading(updatedTask.taskName);
+      setActiveTask(updatedTask);
+      setShowAddTaskUIComponent({
+        showAddTaskButton: true,
+        showAddTaskPopUp: false,
+      });
+
+      return;
     }
 
     setTasksList([
@@ -105,6 +127,15 @@ export const useTasks = () => {
     setActiveTask(task);
   };
 
+  const onTaskEdit = (task) => {
+    setShowAddTaskUIComponent({
+      showAddTaskPopUp: true,
+      showAddTaskButton: false,
+    });
+
+    setTaskRowData(task);
+  };
+
   return {
     taskTitleHeading,
     tasksList,
@@ -120,5 +151,6 @@ export const useTasks = () => {
     onTaskCheck,
     onTaskNameClick,
     setTasksList,
+    onTaskEdit,
   };
 };

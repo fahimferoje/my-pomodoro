@@ -21,6 +21,7 @@ const PomodoroController = () => {
     onTaskCheck,
     onTaskNameClick,
     setTasksList,
+    onTaskEdit,
   } = useTasks();
 
   const { onComplete, onTabClick, totalCompletedPomodoros, timerMode } =
@@ -56,6 +57,7 @@ const PomodoroController = () => {
           onSave={onSave}
           onCancel={onCancel}
           onInputValueChange={onInputValueChange}
+          onTaskEdit={onTaskEdit}
         />
       </div>
     </div>

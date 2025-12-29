@@ -8,12 +8,16 @@ const TaskRow = ({
   tasksList,
   onTaskCheck,
   onTaskNameClick,
+  onTaskEdit,
   taskRowData: { iconBgColor, textDecoration },
 }) => {
   return (
     <>
       {tasksList.map((task) => (
-        <div className="flex bg-white/80 rounded-lg w-md h-16 pl-2 items-center">
+        <div
+          key={task.key}
+          className="flex bg-white/80 rounded-lg w-md h-16 pl-2 items-center"
+        >
           <FontAwesomeIcon
             onClick={onTaskCheck}
             className={`cursor-pointer text-2xl ${iconBgColor}`}
@@ -35,7 +39,11 @@ const TaskRow = ({
           basis-12 border border-[#dfdfdf] mr-3 
           cursor-pointer hover:bg-[#dfdfdf]"
           >
-            <FontAwesomeIcon className="" icon={faEllipsisVertical} />
+            <FontAwesomeIcon
+              className=""
+              icon={faEllipsisVertical}
+              onClick={() => onTaskEdit(task)}
+            />
           </div>
         </div>
       ))}
