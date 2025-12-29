@@ -13,7 +13,7 @@ const AddTaskSection = ({ showAddTaskButton, onAddTaskButtonClick }) => {
         onClick={onAddTaskButtonClick}
       />
       <button
-        className="not-last:p-0 cursor-pointer"
+        className="not-last:p-0 cursor-pointer order-last"
         onClick={onAddTaskButtonClick}
       >
         Add Task

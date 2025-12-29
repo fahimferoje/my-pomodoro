@@ -128,9 +128,21 @@ export const useTasks = () => {
   };
 
   const onTaskEdit = (task) => {
-    setShowAddTaskUIComponent({
-      showAddTaskPopUp: true,
-      showAddTaskButton: false,
+    if (
+      showAddTaskUIComponent.showAddTaskPopUp &&
+      !showAddTaskUIComponent.showAddTaskButton
+    ) {
+      setShowAddTaskUIComponent({
+        showAddTaskButton: false,
+        showAddTaskPopUp: false,
+      });
+    }
+
+    setShowAddTaskUIComponent((prevState) => {
+      return {
+        ...prevState,
+        showAddTaskPopUp: true,
+      };
     });
 
     setTaskRowData(task);
