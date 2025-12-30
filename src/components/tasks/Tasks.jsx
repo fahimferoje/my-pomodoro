@@ -35,15 +35,17 @@ const Tasks = ({
       <br />
 
       <div className="flex flex-col items-center w-md space-y-2">
-        {tasksList.length > 0 && (
-          <TaskRow
-            tasksList={tasksList}
-            onTaskCheck={onTaskCheck}
-            onTaskNameClick={onTaskNameClick}
-            taskRowData={taskRowData}
-            onTaskEdit={onTaskEdit}
-          />
-        )}
+        {tasksList.length > 0 &&
+          tasksList.map((task) => (
+            <TaskRow
+              key={task.key}
+              task={task}
+              onTaskCheck={onTaskCheck}
+              onTaskNameClick={onTaskNameClick}
+              taskRowData={taskRowData}
+              onTaskEdit={onTaskEdit}
+            />
+          ))}
         <AddTaskSection
           showAddTaskButton={showAddTaskButton}
           onAddTaskButtonClick={onAddTaskButtonClick}
