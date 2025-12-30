@@ -5,6 +5,7 @@ import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
 import AddTaskSection from "./AddTaskSection";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
+import { Fragment } from "react";
 
 const Tasks = ({
   taskTitleHeading,
@@ -22,6 +23,17 @@ const Tasks = ({
   showAddTaskButton,
 }) => {
   const { ADD, EDIT } = PopUpMode;
+
+  const addTaskPopupProps = {
+    onSave,
+    onCancel,
+    onInputValueChange,
+    taskRowData,
+    setTaskRowData,
+    estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
+    show: addTaskPopUpMode.show,
+  };
+
   return (
     <div>
       <div className="text-center text-white text-lg">
@@ -38,43 +50,32 @@ const Tasks = ({
       <br />
 
       <div className="flex flex-col items-center w-md space-y-2">
-        {tasksList.length > 0 &&
-          tasksList.map((task) =>
+        {tasksList.map((task) => {
+          const isEditPopup =
             addTaskPopUpMode.mode === EDIT &&
             addTaskPopUpMode.show &&
-            addTaskPopUpMode.taskRowId === task.key ? (
-              <AddTaskPopUp
-                key={task.key}
-                onSave={onSave}
-                onCancel={onCancel}
-                onInputValueChange={onInputValueChange}
-                taskRowData={taskRowData}
-                setTaskRowData={setTaskRowData}
-                estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
-                show={addTaskPopUpMode.show}
-              />
-            ) : (
-              <TaskRow
-                key={task.key}
-                task={task}
-                onTaskCheck={onTaskCheck}
-                onTaskNameClick={onTaskNameClick}
-                taskRowData={taskRowData}
-                onTaskEdit={onTaskEdit}
-              />
-            )
-          )}
+            addTaskPopUpMode.taskRowId === task.key;
+
+          return (
+            <Fragment key={task.key}>
+              {isEditPopup ? (
+                <AddTaskPopUp {...addTaskPopupProps} />
+              ) : (
+                <TaskRow
+                  key={task.key}
+                  task={task}
+                  onTaskCheck={onTaskCheck}
+                  onTaskNameClick={onTaskNameClick}
+                  taskRowData={taskRowData}
+                  onTaskEdit={onTaskEdit}
+                />
+              )}
+            </Fragment>
+          );
+        })}
 
         {addTaskPopUpMode.mode === ADD && addTaskPopUpMode.show && (
-          <AddTaskPopUp
-            onSave={onSave}
-            onCancel={onCancel}
-            onInputValueChange={onInputValueChange}
-            taskRowData={taskRowData}
-            setTaskRowData={setTaskRowData}
-            estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
-            show={addTaskPopUpMode.show}
-          />
+          <AddTaskPopUp {...addTaskPopupProps} />
         )}
         {showAddTaskButton && (
           <AddTaskSection
