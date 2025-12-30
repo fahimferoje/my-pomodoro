@@ -11,7 +11,7 @@ const TaskRow = ({ task, onTaskCheck, onTaskNameClick, onTaskEdit }) => {
       className="flex bg-white/80 rounded-lg w-md h-16 pl-2 items-center"
     >
       <FontAwesomeIcon
-        onClick={onTaskCheck}
+        onClick={() => onTaskCheck(task)}
         className={`cursor-pointer text-2xl ${task.iconBgColor}`}
         icon={faCircleCheck}
       />
