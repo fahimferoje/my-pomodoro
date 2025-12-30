@@ -1,19 +1,18 @@
 import EstimatedPomodoros from "./EstimatedPomodoros";
 
 const AddTaskPopUp = ({
-  showAddTaskPopUp,
   onSave,
   onCancel,
   onInputValueChange,
   taskRowData,
   setTaskRowData,
   estimatedPomodoroCount,
-  editTaskRowId,
+  show,
 }) => {
   return (
     <div
       className={`bg-white rounded-lg w-md h-60 text-black ${
-        showAddTaskPopUp ? `block` : `hidden`
+        show ? `block` : `hidden`
       }`}
     >
       <input

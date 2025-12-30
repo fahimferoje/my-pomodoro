@@ -11,7 +11,6 @@ const PomodoroController = () => {
     tasksList,
     taskRowData,
     setTaskRowData,
-    showAddTaskUIComponent,
     activeTask,
     setActiveTask,
     onAddTaskButtonClick,
@@ -23,6 +22,7 @@ const PomodoroController = () => {
     setTasksList,
     onTaskEdit,
     addTaskPopUpMode,
+    showAddTaskButton,
   } = useTasks();
 
   const { onComplete, onTabClick, totalCompletedPomodoros, timerMode } =
@@ -49,7 +49,6 @@ const PomodoroController = () => {
         <Tasks
           taskTitleHeading={taskTitleHeading}
           tasksList={tasksList}
-          showAddTaskUIComponent={showAddTaskUIComponent}
           taskRowData={taskRowData}
           onTaskCheck={onTaskCheck}
           onTaskNameClick={onTaskNameClick}
@@ -60,6 +59,7 @@ const PomodoroController = () => {
           onInputValueChange={onInputValueChange}
           onTaskEdit={onTaskEdit}
           addTaskPopUpMode={addTaskPopUpMode}
+          showAddTaskButton={showAddTaskButton}
         />
       </div>
     </div>

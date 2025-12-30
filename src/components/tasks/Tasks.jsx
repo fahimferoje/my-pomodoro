@@ -13,13 +13,13 @@ const Tasks = ({
   onTaskNameClick,
   taskRowData,
   setTaskRowData,
-  showAddTaskUIComponent: { showAddTaskPopUp, showAddTaskButton },
   onAddTaskButtonClick,
   onSave,
   onCancel,
   onInputValueChange,
   onTaskEdit,
   addTaskPopUpMode,
+  showAddTaskButton,
 }) => {
   const { ADD, EDIT } = PopUpMode;
   return (
@@ -41,15 +41,17 @@ const Tasks = ({
         {tasksList.length > 0 &&
           tasksList.map((task) =>
             addTaskPopUpMode.mode === EDIT &&
+            addTaskPopUpMode.show &&
             addTaskPopUpMode.taskRowId === task.key ? (
               <AddTaskPopUp
-                showAddTaskPopUp={showAddTaskPopUp}
+                key={task.key}
                 onSave={onSave}
                 onCancel={onCancel}
                 onInputValueChange={onInputValueChange}
                 taskRowData={taskRowData}
                 setTaskRowData={setTaskRowData}
                 estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
+                show={addTaskPopUpMode.show}
               />
             ) : (
               <TaskRow
@@ -62,35 +64,24 @@ const Tasks = ({
               />
             )
           )}
-        <AddTaskSection
-          showAddTaskButton={showAddTaskButton}
-          onAddTaskButtonClick={onAddTaskButtonClick}
-        />
-        {
-          addTaskPopUpMode.mode === ADD && (
-            <AddTaskPopUp
-              showAddTaskPopUp={showAddTaskPopUp}
-              onSave={onSave}
-              onCancel={onCancel}
-              onInputValueChange={onInputValueChange}
-              taskRowData={taskRowData}
-              setTaskRowData={setTaskRowData}
-              estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
-            />
-          )
 
-          /* <div>
+        {addTaskPopUpMode.mode === ADD && addTaskPopUpMode.show && (
           <AddTaskPopUp
-            showAddTaskPopUp={showAddTaskPopUp}
             onSave={onSave}
             onCancel={onCancel}
             onInputValueChange={onInputValueChange}
             taskRowData={taskRowData}
             setTaskRowData={setTaskRowData}
             estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
+            show={addTaskPopUpMode.show}
           />
-        </div> */
-        }
+        )}
+        {showAddTaskButton && (
+          <AddTaskSection
+            showAddTaskButton={showAddTaskButton}
+            onAddTaskButtonClick={onAddTaskButtonClick}
+          />
+        )}
       </div>
     </div>
   );

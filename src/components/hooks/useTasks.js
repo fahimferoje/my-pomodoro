@@ -18,27 +18,23 @@ export const useTasks = () => {
   const [taskTitleHeading, setTaskTitleHeading] = useState("Time to focus!");
   const [activeTask, setActiveTask] = useState(null);
 
-  const [showAddTaskUIComponent, setShowAddTaskUIComponent] = useState({
-    showAddTaskPopUp: false,
-    showAddTaskButton: true,
-  });
+  const [showAddTaskButton, setShowAddTaskButton] = useState(true);
 
   const { ADD, EDIT } = PopUpMode;
   const [addTaskPopUpMode, setAddTaskPopUpMode] = useState({
     mode: null,
     taskRowId: null,
+    show: false,
   });
 
   const onAddTaskButtonClick = () => {
-    setShowAddTaskUIComponent({
-      showAddTaskPopUp: true,
-      showAddTaskButton: false,
-    });
+    setShowAddTaskButton(false);
 
     setAddTaskPopUpMode((prevState) => {
       return {
         ...prevState,
         mode: ADD,
+        show: true,
       };
     });
 
@@ -54,9 +50,12 @@ export const useTasks = () => {
   };
 
   const onCancel = () => {
-    setShowAddTaskUIComponent({
-      showAddTaskPopUp: false,
-      showAddTaskButton: true,
+    setShowAddTaskButton(true);
+    setAddTaskPopUpMode((prev) => {
+      return {
+        ...prev,
+        show: false,
+      };
     });
 
     setTaskRowData((prevState) => {
@@ -79,7 +78,11 @@ export const useTasks = () => {
     }
 
     //edit mode
-    if (taskRowData.key && tasksList.length !== 0) {
+    if (
+      addTaskPopUpMode.mode === EDIT &&
+      taskRowData.key &&
+      tasksList.length !== 0
+    ) {
       const updatedTask = { ...taskRowData };
 
       const updatedTasks = tasksList.map((task) =>
@@ -89,9 +92,12 @@ export const useTasks = () => {
       setTasksList(updatedTasks);
       setTaskTitleHeading(updatedTask.taskName);
       setActiveTask(updatedTask);
-      setShowAddTaskUIComponent({
-        showAddTaskButton: true,
-        showAddTaskPopUp: false,
+
+      setAddTaskPopUpMode((prev) => {
+        return {
+          ...prev,
+          show: false,
+        };
       });
 
       return;
@@ -142,33 +148,25 @@ export const useTasks = () => {
   };
 
   const onTaskEdit = (task) => {
-    if (
-      showAddTaskUIComponent.showAddTaskPopUp &&
-      !showAddTaskUIComponent.showAddTaskButton
-    ) {
-      setShowAddTaskUIComponent({
-        showAddTaskButton: false,
-        showAddTaskPopUp: false,
+    if (addTaskPopUpMode.show) {
+      setAddTaskPopUpMode((prev) => {
+        return {
+          ...prev,
+          show: false,
+        };
       });
     }
 
-    setAddTaskPopUpMode({ mode: EDIT, taskRowId: task.key });
-
-    setShowAddTaskUIComponent((prevState) => {
-      return {
-        ...prevState,
-        showAddTaskPopUp: true,
-      };
-    });
+    setAddTaskPopUpMode({ mode: EDIT, taskRowId: task.key, show: true });
 
     setTaskRowData(task);
+    setShowAddTaskButton(true);
   };
 
   return {
     taskTitleHeading,
     tasksList,
     taskRowData,
-    showAddTaskUIComponent,
     activeTask,
     setTaskRowData,
     setActiveTask,
@@ -181,5 +179,6 @@ export const useTasks = () => {
     setTasksList,
     onTaskEdit,
     addTaskPopUpMode,
+    showAddTaskButton,
   };
 };
