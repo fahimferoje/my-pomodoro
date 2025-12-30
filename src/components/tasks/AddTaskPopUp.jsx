@@ -8,6 +8,7 @@ const AddTaskPopUp = ({
   taskRowData,
   setTaskRowData,
   estimatedPomodoroCount,
+  editTaskRowId,
 }) => {
   return (
     <div

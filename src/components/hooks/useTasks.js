@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getRandomInt } from "../constants/RandomIntGenerator";
+import { PopUpMode } from "../constants/AddTaskPopUpMode";
 
 export const useTasks = () => {
   const [taskRowData, setTaskRowData] = useState({
@@ -22,10 +23,23 @@ export const useTasks = () => {
     showAddTaskButton: true,
   });
 
+  const { ADD, EDIT } = PopUpMode;
+  const [addTaskPopUpMode, setAddTaskPopUpMode] = useState({
+    mode: null,
+    taskRowId: null,
+  });
+
   const onAddTaskButtonClick = () => {
     setShowAddTaskUIComponent({
       showAddTaskPopUp: true,
       showAddTaskButton: false,
+    });
+
+    setAddTaskPopUpMode((prevState) => {
+      return {
+        ...prevState,
+        mode: ADD,
+      };
     });
 
     setTaskRowData({
@@ -138,6 +152,8 @@ export const useTasks = () => {
       });
     }
 
+    setAddTaskPopUpMode({ mode: EDIT, taskRowId: task.key });
+
     setShowAddTaskUIComponent((prevState) => {
       return {
         ...prevState,
@@ -164,5 +180,6 @@ export const useTasks = () => {
     onTaskNameClick,
     setTasksList,
     onTaskEdit,
+    addTaskPopUpMode,
   };
 };

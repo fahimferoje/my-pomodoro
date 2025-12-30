@@ -4,6 +4,7 @@ import AddTaskPopUp from "./AddTaskPopUp";
 import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
 import AddTaskSection from "./AddTaskSection";
+import { PopUpMode } from "../constants/AddTaskPopUpMode";
 
 const Tasks = ({
   taskTitleHeading,
@@ -18,7 +19,9 @@ const Tasks = ({
   onCancel,
   onInputValueChange,
   onTaskEdit,
+  addTaskPopUpMode,
 }) => {
+  const { ADD, EDIT } = PopUpMode;
   return (
     <div>
       <div className="text-center text-white text-lg">
@@ -36,21 +39,47 @@ const Tasks = ({
 
       <div className="flex flex-col items-center w-md space-y-2">
         {tasksList.length > 0 &&
-          tasksList.map((task) => (
-            <TaskRow
-              key={task.key}
-              task={task}
-              onTaskCheck={onTaskCheck}
-              onTaskNameClick={onTaskNameClick}
-              taskRowData={taskRowData}
-              onTaskEdit={onTaskEdit}
-            />
-          ))}
+          tasksList.map((task) =>
+            addTaskPopUpMode.mode === EDIT &&
+            addTaskPopUpMode.taskRowId === task.key ? (
+              <AddTaskPopUp
+                showAddTaskPopUp={showAddTaskPopUp}
+                onSave={onSave}
+                onCancel={onCancel}
+                onInputValueChange={onInputValueChange}
+                taskRowData={taskRowData}
+                setTaskRowData={setTaskRowData}
+                estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
+              />
+            ) : (
+              <TaskRow
+                key={task.key}
+                task={task}
+                onTaskCheck={onTaskCheck}
+                onTaskNameClick={onTaskNameClick}
+                taskRowData={taskRowData}
+                onTaskEdit={onTaskEdit}
+              />
+            )
+          )}
         <AddTaskSection
           showAddTaskButton={showAddTaskButton}
           onAddTaskButtonClick={onAddTaskButtonClick}
         />
-        <div>
+        {
+          addTaskPopUpMode.mode === ADD && (
+            <AddTaskPopUp
+              showAddTaskPopUp={showAddTaskPopUp}
+              onSave={onSave}
+              onCancel={onCancel}
+              onInputValueChange={onInputValueChange}
+              taskRowData={taskRowData}
+              setTaskRowData={setTaskRowData}
+              estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
+            />
+          )
+
+          /* <div>
           <AddTaskPopUp
             showAddTaskPopUp={showAddTaskPopUp}
             onSave={onSave}
@@ -60,7 +89,8 @@ const Tasks = ({
             setTaskRowData={setTaskRowData}
             estimatedPomodoroCount={taskRowData.estimatedPomodoroCount}
           />
-        </div>
+        </div> */
+        }
       </div>
     </div>
   );
