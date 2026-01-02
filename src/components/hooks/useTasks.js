@@ -131,16 +131,23 @@ export const useTasks = () => {
     });
   };
 
-  const onTaskCheck = (task) => {
-    //TODO: fix bug here
-    // setTaskRowData((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     checked: !prevState.checked,
-    //     iconBgColor: prevState.checked ? "" : "text-red-400",
-    //     textDecoration: prevState.checked ? "" : "line-through",
-    //   };
-    // });
+  const onTaskCheck = (editableTask) => {
+    let updatedTask = null;
+
+    const updatedTasks = tasksList.map((task) => {
+      if (task.key === editableTask.key) {
+        updatedTask = {
+          ...task,
+          checked: !editableTask.checked,
+          iconBgColor: editableTask.checked ? "" : "text-red-400",
+          textDecoration: editableTask.checked ? "" : "line-through",
+        };
+        return updatedTask;
+      }
+      return task;
+    });
+
+    setTasksList(updatedTasks);
   };
 
   const onTaskNameClick = (task) => {
