@@ -20,6 +20,9 @@ export const useTasks = () => {
 
   const [showAddTaskButton, setShowAddTaskButton] = useState(true);
 
+  const [showAllTasksSectionEditModal, setshowAllTasksSectionEditModal] =
+    useState(false);
+
   const { ADD, EDIT } = PopUpMode;
   const [addTaskPopUpMode, setAddTaskPopUpMode] = useState({
     mode: null,
@@ -171,6 +174,10 @@ export const useTasks = () => {
     setShowAddTaskButton(true);
   };
 
+  const onAllTasksSectionEdit = () => {
+    setshowAllTasksSectionEditModal(true);
+  };
+
   return {
     taskTitleHeading,
     tasksList,
@@ -188,5 +195,7 @@ export const useTasks = () => {
     onTaskEdit,
     addTaskPopUpMode,
     showAddTaskButton,
+    onAllTasksSectionEdit,
+    showAllTasksSectionEditModal,
   };
 };

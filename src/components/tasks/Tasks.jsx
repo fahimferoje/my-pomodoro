@@ -6,6 +6,7 @@ import TaskTitle from "./TaskTitle";
 import AddTaskSection from "./AddTaskSection";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
 import { Fragment } from "react";
+import AllTaskEditSectionModal from "./AllTaskEditSectionModal";
 
 const Tasks = ({
   taskTitleHeading,
@@ -21,6 +22,8 @@ const Tasks = ({
   onTaskEdit,
   addTaskPopUpMode,
   showAddTaskButton,
+  onAllTasksSectionEdit,
+  showAllTasksSectionEditModal,
 }) => {
   const { ADD, EDIT } = PopUpMode;
 
@@ -35,16 +38,17 @@ const Tasks = ({
   };
 
   return (
-    <div>
+    <div className="relative">
       <div className="text-center text-white text-lg">
         <TaskTitle taskTitleHeading={taskTitleHeading} />
       </div>
-      <div
-        className="flex flex-row text-white mt-5 w-md 
-                  justify-between"
-      >
+      <div className="flex flex-row text-white mt-5 w-md justify-between">
         <h1 className="">Tasks</h1>
-        <FontAwesomeIcon icon={faEllipsisVertical} />
+        <FontAwesomeIcon
+          icon={faEllipsisVertical}
+          onClick={onAllTasksSectionEdit}
+        />
+        {showAllTasksSectionEditModal && <AllTaskEditSectionModal />}
       </div>
       <div className="border-b-4 pt-3 border-zinc-50"></div>
       <br />
