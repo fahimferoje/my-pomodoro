@@ -45,19 +45,27 @@ export const useTasks = () => {
   }, [onAllTasksEditSectionModalClose]);
 
   const onClearFinishedTasks = () => {
-    const allUnfinishedTasks = tasksList.map((task) => {
-      if (!task.checked) {
-        return task;
-      }
-    });
+    onAllTasksEditSectionModalClose();
+
+    if (tasksList.length === 0) {
+      return;
+    }
+
+    const allUnfinishedTasks = tasksList
+      .filter((task) => !task.checked)
+      .map((task) => task);
 
     setTasksList(allUnfinishedTasks);
-    onAllTasksEditSectionModalClose();
   };
 
   const onClearAllTasks = () => {
-    setTasksList([]);
     onAllTasksEditSectionModalClose();
+
+    if (tasksList.length === 0) {
+      return;
+    }
+
+    setTasksList([]);
   };
 
   const { ADD, EDIT } = PopUpMode;
