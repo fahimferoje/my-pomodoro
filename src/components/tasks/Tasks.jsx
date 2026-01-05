@@ -24,6 +24,7 @@ const Tasks = ({
   showAddTaskButton,
   onAllTasksSectionEdit,
   showAllTasksSectionEditModal,
+  allTasksEditSectionModalRef,
 }) => {
   const { ADD, EDIT } = PopUpMode;
 
@@ -49,7 +50,11 @@ const Tasks = ({
           icon={faEllipsisVertical}
           onClick={onAllTasksSectionEdit}
         />
-        {showAllTasksSectionEditModal && <AllTaskEditSectionModal />}
+        {showAllTasksSectionEditModal && (
+          <AllTaskEditSectionModal
+            allTasksEditSectionModalRef={allTasksEditSectionModalRef}
+          />
+        )}
       </div>
       <div className="border-b-4 pt-3 border-zinc-50"></div>
       <br />

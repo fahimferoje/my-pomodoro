@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const AllTaskEditSectionModal = () => {
+const AllTaskEditSectionModal = ({ allTasksEditSectionModalRef }) => {
   return (
     <div
+      ref={allTasksEditSectionModalRef}
       className={`absolute bg-white rounded shadow-lg w-[210px] h-56 
         text-black flex items-center flex-col z-40 mt-8 ml-60`}
     >

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { getRandomInt } from "../constants/RandomIntGenerator";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
 
@@ -22,6 +22,27 @@ export const useTasks = () => {
 
   const [showAllTasksSectionEditModal, setshowAllTasksSectionEditModal] =
     useState(false);
+
+  const allTasksEditSectionModalRef = useRef(null);
+
+  const onAllTasksEditSectionModalClose = () => {
+    setshowAllTasksSectionEditModal(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        allTasksEditSectionModalRef.current &&
+        !allTasksEditSectionModalRef.current.contains(e.target)
+      ) {
+        onAllTasksEditSectionModalClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onAllTasksEditSectionModalClose]);
 
   const { ADD, EDIT } = PopUpMode;
   const [addTaskPopUpMode, setAddTaskPopUpMode] = useState({
@@ -197,5 +218,6 @@ export const useTasks = () => {
     showAddTaskButton,
     onAllTasksSectionEdit,
     showAllTasksSectionEditModal,
+    allTasksEditSectionModalRef,
   };
 };
