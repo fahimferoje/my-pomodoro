@@ -175,7 +175,7 @@ export const useTasks = () => {
   };
 
   const onAllTasksSectionEdit = () => {
-    setshowAllTasksSectionEditModal(true);
+    setshowAllTasksSectionEditModal((prevState) => !prevState);
   };
 
   return {

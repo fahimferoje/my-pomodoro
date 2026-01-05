@@ -38,13 +38,14 @@ const Tasks = ({
   };
 
   return (
-    <div className="relative">
+    <div className="">
       <div className="text-center text-white text-lg">
         <TaskTitle taskTitleHeading={taskTitleHeading} />
       </div>
-      <div className="flex flex-row text-white mt-5 w-md justify-between">
+      <div className="relative flex flex-row text-white mt-5 w-md justify-between">
         <h1 className="">Tasks</h1>
         <FontAwesomeIcon
+          className="cursor-pointer"
           icon={faEllipsisVertical}
           onClick={onAllTasksSectionEdit}
         />
