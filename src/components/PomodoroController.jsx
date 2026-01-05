@@ -26,6 +26,8 @@ const PomodoroController = () => {
     onAllTasksSectionEdit,
     showAllTasksSectionEditModal,
     allTasksEditSectionModalRef,
+    onClearFinishedTasks,
+    onClearAllTasks,
   } = useTasks();
 
   const { onComplete, onTabClick, totalCompletedPomodoros, timerMode } =
@@ -66,6 +68,8 @@ const PomodoroController = () => {
           onAllTasksSectionEdit={onAllTasksSectionEdit}
           showAllTasksSectionEditModal={showAllTasksSectionEditModal}
           allTasksEditSectionModalRef={allTasksEditSectionModalRef}
+          onClearFinishedTasks={onClearFinishedTasks}
+          onClearAllTasks={onClearAllTasks}
         />
       </div>
     </div>

@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const AllTaskEditSectionModal = ({ allTasksEditSectionModalRef }) => {
+const AllTaskEditSectionModal = ({
+  allTasksEditSectionModalRef,
+  onClearFinishedTasks,
+  onClearAllTasks,
+}) => {
   return (
     <div
       ref={allTasksEditSectionModalRef}
@@ -11,12 +15,19 @@ const AllTaskEditSectionModal = ({ allTasksEditSectionModalRef }) => {
       <div className="pt-5 pl-3 w-full">
         <div className="hover:bg-neutral-200">
           <FontAwesomeIcon className="cursor-pointer" icon={faTrash} />
-          <button className="ml-2 cursor-pointer">Clear finished tasks</button>
+          <button
+            onClick={onClearFinishedTasks}
+            className="ml-2 cursor-pointer"
+          >
+            Clear finished tasks
+          </button>
         </div>
 
         <div className="hover:bg-neutral-200">
           <FontAwesomeIcon className="cursor-pointer" icon={faTrash} />
-          <button className="ml-2 cursor-pointer">Clear all tasks</button>
+          <button onClick={onClearAllTasks} className="ml-2 cursor-pointer">
+            Clear all tasks
+          </button>
         </div>
       </div>
     </div>

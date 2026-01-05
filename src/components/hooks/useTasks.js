@@ -44,6 +44,22 @@ export const useTasks = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onAllTasksEditSectionModalClose]);
 
+  const onClearFinishedTasks = () => {
+    const allUnfinishedTasks = tasksList.map((task) => {
+      if (!task.checked) {
+        return task;
+      }
+    });
+
+    setTasksList(allUnfinishedTasks);
+    onAllTasksEditSectionModalClose();
+  };
+
+  const onClearAllTasks = () => {
+    setTasksList([]);
+    onAllTasksEditSectionModalClose();
+  };
+
   const { ADD, EDIT } = PopUpMode;
   const [addTaskPopUpMode, setAddTaskPopUpMode] = useState({
     mode: null,
@@ -219,5 +235,7 @@ export const useTasks = () => {
     onAllTasksSectionEdit,
     showAllTasksSectionEditModal,
     allTasksEditSectionModalRef,
+    onClearFinishedTasks,
+    onClearAllTasks,
   };
 };

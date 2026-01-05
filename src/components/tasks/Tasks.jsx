@@ -25,6 +25,8 @@ const Tasks = ({
   onAllTasksSectionEdit,
   showAllTasksSectionEditModal,
   allTasksEditSectionModalRef,
+  onClearFinishedTasks,
+  onClearAllTasks,
 }) => {
   const { ADD, EDIT } = PopUpMode;
 
@@ -53,6 +55,8 @@ const Tasks = ({
         {showAllTasksSectionEditModal && (
           <AllTaskEditSectionModal
             allTasksEditSectionModalRef={allTasksEditSectionModalRef}
+            onClearFinishedTasks={onClearFinishedTasks}
+            onClearAllTasks={onClearAllTasks}
           />
         )}
       </div>
