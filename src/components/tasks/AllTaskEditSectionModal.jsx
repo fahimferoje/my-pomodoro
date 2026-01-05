@@ -9,7 +9,7 @@ const AllTaskEditSectionModal = ({
   return (
     <div
       ref={allTasksEditSectionModalRef}
-      className={`absolute bg-white rounded shadow-lg w-[210px] h-56 
+      className={`absolute bg-white rounded shadow-lg w-[210px] h-40 
         text-black flex items-center flex-col z-40 mt-8 ml-60`}
     >
       <div className="pt-5 pl-3 w-full">
