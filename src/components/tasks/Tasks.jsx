@@ -7,10 +7,12 @@ import AddTaskSection from "./AddTaskSection";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
 import { Fragment } from "react";
 import AllTaskEditSectionModal from "./AllTaskEditSectionModal";
+import { useAllTasksEdit } from "../hooks/useAllTasksEdit.js";
 
 const Tasks = ({
   taskTitleHeading,
   tasksList,
+  setTasksList,
   onTaskCheck,
   onTaskNameClick,
   taskRowData,
@@ -22,11 +24,6 @@ const Tasks = ({
   onTaskEdit,
   addTaskPopUpMode,
   showAddTaskButton,
-  onAllTasksSectionEdit,
-  showAllTasksSectionEditModal,
-  allTasksEditSectionModalRef,
-  onClearFinishedTasks,
-  onClearAllTasks,
 }) => {
   const { ADD, EDIT } = PopUpMode;
 
@@ -39,6 +36,14 @@ const Tasks = ({
     estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
     show: addTaskPopUpMode.show,
   };
+
+  const {
+    showAllTasksSectionEditModal,
+    onClearFinishedTasks,
+    onClearAllTasks,
+    onAllTasksSectionEdit,
+    allTasksEditSectionModalRef,
+  } = useAllTasksEdit(tasksList, setTasksList);
 
   return (
     <div className="">

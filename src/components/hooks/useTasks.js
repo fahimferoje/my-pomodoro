@@ -20,54 +20,6 @@ export const useTasks = () => {
 
   const [showAddTaskButton, setShowAddTaskButton] = useState(true);
 
-  const [showAllTasksSectionEditModal, setshowAllTasksSectionEditModal] =
-    useState(false);
-
-  const allTasksEditSectionModalRef = useRef(null);
-
-  const onAllTasksEditSectionModalClose = () => {
-    setshowAllTasksSectionEditModal(false);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (
-        allTasksEditSectionModalRef.current &&
-        !allTasksEditSectionModalRef.current.contains(e.target)
-      ) {
-        onAllTasksEditSectionModalClose();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onAllTasksEditSectionModalClose]);
-
-  const onClearFinishedTasks = () => {
-    onAllTasksEditSectionModalClose();
-
-    if (tasksList.length === 0) {
-      return;
-    }
-
-    const allUnfinishedTasks = tasksList
-      .filter((task) => !task.checked)
-      .map((task) => task);
-
-    setTasksList(allUnfinishedTasks);
-  };
-
-  const onClearAllTasks = () => {
-    onAllTasksEditSectionModalClose();
-
-    if (tasksList.length === 0) {
-      return;
-    }
-
-    setTasksList([]);
-  };
-
   const { ADD, EDIT } = PopUpMode;
   const [addTaskPopUpMode, setAddTaskPopUpMode] = useState({
     mode: null,
@@ -219,10 +171,6 @@ export const useTasks = () => {
     setShowAddTaskButton(true);
   };
 
-  const onAllTasksSectionEdit = () => {
-    setshowAllTasksSectionEditModal((prevState) => !prevState);
-  };
-
   return {
     taskTitleHeading,
     tasksList,
@@ -240,10 +188,5 @@ export const useTasks = () => {
     onTaskEdit,
     addTaskPopUpMode,
     showAddTaskButton,
-    onAllTasksSectionEdit,
-    showAllTasksSectionEditModal,
-    allTasksEditSectionModalRef,
-    onClearFinishedTasks,
-    onClearAllTasks,
   };
 };
