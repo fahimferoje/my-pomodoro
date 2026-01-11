@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { getRandomInt } from "../constants/RandomIntGenerator";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
+import { addTask, getAllTasks } from "../../db/indexedDb.js";
 
 export const useTasks = () => {
   const [taskRowData, setTaskRowData] = useState({
@@ -26,6 +27,10 @@ export const useTasks = () => {
     taskRowId: null,
     show: false,
   });
+
+  useEffect(() => {
+    getAllTasks().then(setTasksList);
+  }, []);
 
   const onAddTaskButtonClick = () => {
     setShowAddTaskButton(false);
@@ -67,7 +72,7 @@ export const useTasks = () => {
     });
   };
 
-  const onSave = () => {
+  const onSave = async () => {
     if (!taskRowData.taskName) {
       return;
     }
@@ -103,15 +108,16 @@ export const useTasks = () => {
       return;
     }
 
-    setTasksList([
-      ...tasksList,
-      {
-        key: getRandomInt(),
-        taskName: taskRowData.taskName,
-        estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
-        localPomodoroSessionCount: taskRowData.localPomodoroSessionCount,
-      },
-    ]);
+    const newTask = {
+      id: getRandomInt(),
+      taskName: taskRowData.taskName,
+      estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
+      localPomodoroSessionCount: taskRowData.localPomodoroSessionCount,
+    };
+
+    await addTask(newTask);
+
+    setTasksList(await getAllTasks());
 
     setTaskRowData((prevState) => {
       return {
