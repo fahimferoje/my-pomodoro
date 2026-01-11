@@ -4,7 +4,7 @@ import { PopUpMode } from "../constants/AddTaskPopUpMode";
 
 export const useTasks = () => {
   const [taskRowData, setTaskRowData] = useState({
-    key: null,
+    id: null,
     taskName: "",
     checked: false,
     iconBgColor: "",
@@ -39,7 +39,7 @@ export const useTasks = () => {
     });
 
     setTaskRowData({
-      key: null,
+      id: null,
       taskName: "",
       checked: false,
       iconBgColor: "",
@@ -80,13 +80,13 @@ export const useTasks = () => {
     //edit mode
     if (
       addTaskPopUpMode.mode === EDIT &&
-      taskRowData.key &&
+      taskRowData.id &&
       tasksList.length !== 0
     ) {
       const updatedTask = { ...taskRowData };
 
       const updatedTasks = tasksList.map((task) =>
-        task.key === taskRowData.key ? updatedTask : task
+        task.key === taskRowData.id ? updatedTask : task
       );
 
       setTasksList(updatedTasks);
