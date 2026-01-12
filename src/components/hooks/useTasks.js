@@ -109,6 +109,7 @@ export const useTasks = () => {
     }
 
     const newTask = {
+      ...taskRowData,
       id: getRandomInt(),
       taskName: taskRowData.taskName,
       estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
@@ -141,7 +142,7 @@ export const useTasks = () => {
     let updatedTask = null;
 
     const updatedTasks = tasksList.map((task) => {
-      if (task.key === editableTask.key) {
+      if (task.id === editableTask.id) {
         updatedTask = {
           ...task,
           checked: !editableTask.checked,

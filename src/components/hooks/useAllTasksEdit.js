@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { deleteTask, getAllTasks } from "../../db/indexedDb.js";
 
 export const useAllTasksEdit = (tasksList, setTasksList) => {
   const [showAllTasksSectionEditModal, setshowAllTasksSectionEditModal] =
@@ -29,28 +30,44 @@ export const useAllTasksEdit = (tasksList, setTasksList) => {
     setshowAllTasksSectionEditModal((prevState) => !prevState);
   };
 
-  const onClearFinishedTasks = () => {
+  const onClearFinishedTasks = async () => {
     onAllTasksEditSectionModalClose();
 
     if (tasksList.length === 0) {
       return;
     }
 
-    const allUnfinishedTasks = tasksList
-      .filter((task) => !task.checked)
+    const finishedTasks = tasksList
+      .filter((task) => task.checked)
       .map((task) => task);
 
-    setTasksList(allUnfinishedTasks);
+    console.dir(finishedTasks);
+
+    await deleteTasks(finishedTasks);
+
+    setTasksList(await getAllTasks());
   };
 
-  const onClearAllTasks = () => {
+  const onClearAllTasks = async () => {
     onAllTasksEditSectionModalClose();
+
+    console.dir(tasksList);
 
     if (tasksList.length === 0) {
       return;
     }
 
+    await deleteTasks(tasks);
     setTasksList([]);
+  };
+
+  const deleteTasks = async (tasks) => {
+    try {
+      await Promise.all(tasks.map((task) => deleteTask(task.id)));
+      setTasksList([]);
+    } catch (error) {
+      alert("Failed to delete all tasks", error);
+    }
   };
 
   return {
