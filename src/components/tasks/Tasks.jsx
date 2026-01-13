@@ -73,7 +73,7 @@ const Tasks = ({
           const isEditPopup =
             addTaskPopUpMode.mode === EDIT &&
             addTaskPopUpMode.show &&
-            addTaskPopUpMode.taskRowId === task.key;
+            addTaskPopUpMode.taskRowId === task.id;
 
           return (
             <Fragment key={task.key}>

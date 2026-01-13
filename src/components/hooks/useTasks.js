@@ -1,11 +1,9 @@
-import { useState, useRef, useEffect } from "react";
-import { getRandomInt } from "../constants/RandomIntGenerator";
+import { useState, useEffect } from "react";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
-import { addTask, getAllTasks } from "../../db/indexedDb.js";
+import { addTask, getAllTasks, updateTask } from "../../db/indexedDb.js";
 
 export const useTasks = () => {
   const [taskRowData, setTaskRowData] = useState({
-    id: null,
     taskName: "",
     checked: false,
     iconBgColor: "",
@@ -44,7 +42,7 @@ export const useTasks = () => {
     });
 
     setTaskRowData({
-      id: null,
+      //id: null,
       taskName: "",
       checked: false,
       iconBgColor: "",
@@ -90,11 +88,9 @@ export const useTasks = () => {
     ) {
       const updatedTask = { ...taskRowData };
 
-      const updatedTasks = tasksList.map((task) =>
-        task.key === taskRowData.id ? updatedTask : task
-      );
+      await updateTask(updatedTask);
 
-      setTasksList(updatedTasks);
+      setTasksList(await getAllTasks());
       setTaskTitleHeading(updatedTask.taskName);
       setActiveTask(updatedTask);
 
@@ -110,7 +106,6 @@ export const useTasks = () => {
 
     const newTask = {
       ...taskRowData,
-      id: getRandomInt(),
       taskName: taskRowData.taskName,
       estimatedPomodoroCount: taskRowData.estimatedPomodoroCount,
       localPomodoroSessionCount: taskRowData.localPomodoroSessionCount,
@@ -172,7 +167,7 @@ export const useTasks = () => {
       });
     }
 
-    setAddTaskPopUpMode({ mode: EDIT, taskRowId: task.key, show: true });
+    setAddTaskPopUpMode({ mode: EDIT, taskRowId: task.id, show: true });
 
     setTaskRowData(task);
     setShowAddTaskButton(true);
