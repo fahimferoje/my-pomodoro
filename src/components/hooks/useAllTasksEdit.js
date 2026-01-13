@@ -53,6 +53,8 @@ export const useAllTasksEdit = (tasksList, setTasksList) => {
       return;
     }
 
+    //TODO: solve active task bug
+
     await deleteTasks(tasksList);
     setTasksList([]);
   };
