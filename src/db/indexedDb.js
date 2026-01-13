@@ -1,10 +1,11 @@
 import { openDB } from "idb";
 
-export const dbPromise = openDB("pomodoro", 1, {
+export const dbPromise = openDB("pomodoro", 2, {
   upgrade(db) {
     if (!db.objectStoreNames.contains("tasks")) {
       const store = db.createObjectStore("tasks", {
         keyPath: "id",
+        autoIncrement: true,
       });
 
       store.createIndex("taskId", "id");
