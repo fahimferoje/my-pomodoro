@@ -41,8 +41,6 @@ export const useAllTasksEdit = (tasksList, setTasksList) => {
       .filter((task) => task.checked)
       .map((task) => task);
 
-    console.dir(finishedTasks);
-
     await deleteTasks(finishedTasks);
 
     setTasksList(await getAllTasks());
@@ -51,13 +49,11 @@ export const useAllTasksEdit = (tasksList, setTasksList) => {
   const onClearAllTasks = async () => {
     onAllTasksEditSectionModalClose();
 
-    console.dir(tasksList);
-
     if (tasksList.length === 0) {
       return;
     }
 
-    await deleteTasks(tasks);
+    await deleteTasks(tasksList);
     setTasksList([]);
   };
 
