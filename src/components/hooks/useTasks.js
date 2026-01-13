@@ -90,7 +90,10 @@ export const useTasks = () => {
 
       await updateTask(updatedTask);
 
-      setTasksList(await getAllTasks());
+      setTasksList((prev) =>
+        prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      );
+
       setTaskTitleHeading(updatedTask.taskName);
       setActiveTask(updatedTask);
 
@@ -111,9 +114,18 @@ export const useTasks = () => {
       localPomodoroSessionCount: taskRowData.localPomodoroSessionCount,
     };
 
-    await addTask(newTask);
+    const id = await addTask(newTask);
 
-    setTasksList(await getAllTasks());
+    const persistedNewTask = {
+      id,
+      ...newTask,
+    };
+
+    setTasksList((prev) =>
+      prev.map((task) =>
+        task.id === persistedNewTask.id ? persistedNewTask : task
+      )
+    );
 
     setTaskRowData((prevState) => {
       return {
@@ -133,23 +145,19 @@ export const useTasks = () => {
     });
   };
 
-  const onTaskCheck = (editableTask) => {
-    let updatedTask = null;
+  const onTaskCheck = async (editableTask) => {
+    const updatedTask = {
+      ...editableTask,
+      checked: !editableTask.checked,
+      iconBgColor: editableTask.checked ? "" : "text-red-400",
+      textDecoration: editableTask.checked ? "" : "line-through",
+    };
 
-    const updatedTasks = tasksList.map((task) => {
-      if (task.id === editableTask.id) {
-        updatedTask = {
-          ...task,
-          checked: !editableTask.checked,
-          iconBgColor: editableTask.checked ? "" : "text-red-400",
-          textDecoration: editableTask.checked ? "" : "line-through",
-        };
-        return updatedTask;
-      }
-      return task;
-    });
+    await updateTask(updatedTask);
 
-    setTasksList(updatedTasks);
+    setTasksList((prev) =>
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
   };
 
   const onTaskNameClick = (task) => {
