@@ -4,7 +4,7 @@ import { getActiveTask, updateActiveTask } from "../../db/indexedDb.js";
 
 const MAX_POMODORO_SESSION_COUNT = 3;
 
-export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
+export const usePomodoroTimer = (setTasksList) => {
   const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
 
   const [timerMode, setTimerMode] = useState(POMODORO);
