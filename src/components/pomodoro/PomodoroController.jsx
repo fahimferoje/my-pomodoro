@@ -1,8 +1,8 @@
 import Timer from "./Timer";
 import Tabs from "./Tabs";
 import TotalCompletedPomodorosCount from "./TotalCompletedPomodorosCount.jsx";
-import Tasks from "../components/tasks/Tasks";
-import { usePomodoroTimer } from "../components/hooks/usePomodoroTimer.js";
+import Tasks from "../tasks/Tasks.jsx";
+import { usePomodoroTimer } from "../hooks/usePomodoroTimer.js";
 import { useState } from "react";
 
 const PomodoroController = () => {

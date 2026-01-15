@@ -1,4 +1,4 @@
-import { useCountDownTimer } from "./hooks/useCountDownTimer.js";
+import { useCountDownTimer } from "../hooks/useCountDownTimer.js";
 
 const Timer = ({ mode, onComplete }) => {
   const { timeLeft, toggleTimer, isRunning } = useCountDownTimer(

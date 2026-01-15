@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import PomodoroController from "./components/PomodoroController";
+import PomodoroController from "./components/pomodoro/PomodoroController";
 import { dbPromise } from "./db/indexedDb.js";
 function App() {
   useEffect(() => {

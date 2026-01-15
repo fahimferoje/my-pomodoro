@@ -1,4 +1,4 @@
-import { Mode } from "../components/constants/PomodoroMode.js";
+import { Mode } from "../constants/PomodoroMode.js";
 
 export default function Tabs({ active, onTabClick }) {
   return (
