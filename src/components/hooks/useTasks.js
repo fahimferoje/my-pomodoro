@@ -9,7 +9,7 @@ import {
   getActiveTask,
 } from "../../db/indexedDb.js";
 
-export const useTasks = () => {
+export const useTasks = (tasksList, setTasksList) => {
   const [taskRowData, setTaskRowData] = useState({
     taskName: "",
     checked: false,
@@ -18,8 +18,6 @@ export const useTasks = () => {
     estimatedPomodoroCount: 1,
     localPomodoroSessionCount: 0,
   });
-
-  const [tasksList, setTasksList] = useState([]);
 
   const [taskTitleHeading, setTaskTitleHeading] = useState("Time to focus!");
 
@@ -33,7 +31,6 @@ export const useTasks = () => {
   });
 
   useEffect(() => {
-    console.log("running effect");
     getAllTasks().then(setTasksList);
     getActiveTask()
       .then((res) => setTaskTitleHeading(res.taskName))

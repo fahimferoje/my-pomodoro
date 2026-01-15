@@ -8,25 +8,26 @@ import { PopUpMode } from "../constants/AddTaskPopUpMode";
 import { Fragment } from "react";
 import AllTaskEditSectionModal from "./AllTaskEditSectionModal";
 import { useAllTasksEdit } from "../hooks/useAllTasksEdit.js";
+import { useTasks } from "../hooks/useTasks.js";
 
-const Tasks = ({
-  taskTitleHeading,
-  setTaskTitleHeading,
-  tasksList,
-  setTasksList,
-  onTaskCheck,
-  onTaskNameClick,
-  taskRowData,
-  setTaskRowData,
-  onAddTaskButtonClick,
-  onSave,
-  onCancel,
-  onInputValueChange,
-  onTaskEdit,
-  addTaskPopUpMode,
-  showAddTaskButton,
-}) => {
+const Tasks = ({ tasksList, setTasksList }) => {
   const { ADD, EDIT } = PopUpMode;
+
+  const {
+    taskTitleHeading,
+    taskRowData,
+    setTaskRowData,
+    onAddTaskButtonClick,
+    onCancel,
+    onSave,
+    onInputValueChange,
+    onTaskCheck,
+    onTaskNameClick,
+    onTaskEdit,
+    addTaskPopUpMode,
+    showAddTaskButton,
+    setTaskTitleHeading,
+  } = useTasks(tasksList, setTasksList);
 
   const addTaskPopupProps = {
     onSave,

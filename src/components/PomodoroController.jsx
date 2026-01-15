@@ -2,27 +2,11 @@ import Timer from "./Timer";
 import Tabs from "./Tabs";
 import TotalCompletedPomodorosCount from "./TotalCompletedPomodorosCount.jsx";
 import Tasks from "../components/tasks/Tasks";
-import { useTasks } from "../components/hooks/useTasks.js";
 import { usePomodoroTimer } from "../components/hooks/usePomodoroTimer.js";
+import { useState } from "react";
 
 const PomodoroController = () => {
-  const {
-    taskTitleHeading,
-    tasksList,
-    taskRowData,
-    setTaskRowData,
-    onAddTaskButtonClick,
-    onCancel,
-    onSave,
-    onInputValueChange,
-    onTaskCheck,
-    onTaskNameClick,
-    setTasksList,
-    onTaskEdit,
-    addTaskPopUpMode,
-    showAddTaskButton,
-    setTaskTitleHeading,
-  } = useTasks();
+  const [tasksList, setTasksList] = useState([]);
 
   const { onComplete, onTabClick, totalCompletedPomodoros, timerMode } =
     usePomodoroTimer(setTasksList);
@@ -45,23 +29,7 @@ const PomodoroController = () => {
         />
       </div>
       <div>
-        <Tasks
-          taskTitleHeading={taskTitleHeading}
-          setTaskTitleHeading={setTaskTitleHeading}
-          tasksList={tasksList}
-          setTasksList={setTasksList}
-          taskRowData={taskRowData}
-          onTaskCheck={onTaskCheck}
-          onTaskNameClick={onTaskNameClick}
-          setTaskRowData={setTaskRowData}
-          onAddTaskButtonClick={onAddTaskButtonClick}
-          onSave={onSave}
-          onCancel={onCancel}
-          onInputValueChange={onInputValueChange}
-          onTaskEdit={onTaskEdit}
-          addTaskPopUpMode={addTaskPopUpMode}
-          showAddTaskButton={showAddTaskButton}
-        />
+        <Tasks tasksList={tasksList} setTasksList={setTasksList} />
       </div>
     </div>
   );
