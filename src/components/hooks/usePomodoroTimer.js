@@ -1,5 +1,6 @@
 import { Mode } from "../constants/PomodoroMode.js";
 import { useState } from "react";
+import { getActiveTask, updateActiveTask } from "../../db/indexedDb.js";
 
 const MAX_POMODORO_SESSION_COUNT = 3;
 
@@ -12,7 +13,7 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
 
   const [completedPomodoros, setCompletedPomodoros] = useState(1);
 
-  const onComplete = () => {
+  const onComplete = async () => {
     if (completedPomodoros % MAX_POMODORO_SESSION_COUNT === 0) {
       setTimerMode(LONG_BREAK);
       setCompletedPomodoros(1);
@@ -22,6 +23,8 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
     if (timerMode === POMODORO) {
       setTimerMode(SHORT_BREAK);
 
+      const activeTask = await getActiveTask();
+
       setTasksList((prevList) => {
         if (!activeTask) {
           return prevList;
@@ -30,7 +33,7 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
         let updatedTask = null;
 
         const updatedList = prevList.map((task) => {
-          if (task.key === activeTask.key) {
+          if (task.id === activeTask.id) {
             updatedTask = {
               ...task,
               localPomodoroSessionCount: task.localPomodoroSessionCount + 1,
@@ -40,7 +43,7 @@ export const usePomodoroTimer = (activeTask, setActiveTask, setTasksList) => {
           return task;
         });
         if (updatedTask) {
-          setActiveTask(updatedTask);
+          updateActiveTask(updatedTask);
         }
         return updatedList;
       });

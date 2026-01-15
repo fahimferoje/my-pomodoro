@@ -1,7 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { deleteTask, getAllTasks } from "../../db/indexedDb.js";
+import {
+  deleteTask,
+  getAllTasks,
+  deleteActiveTask,
+} from "../../db/indexedDb.js";
 
-export const useAllTasksEdit = (tasksList, setTasksList) => {
+export const useAllTasksEdit = (
+  tasksList,
+  setTasksList,
+  setTaskTitleHeading
+) => {
   const [showAllTasksSectionEditModal, setshowAllTasksSectionEditModal] =
     useState(false);
 
@@ -53,10 +61,9 @@ export const useAllTasksEdit = (tasksList, setTasksList) => {
       return;
     }
 
-    //TODO: solve active task bug
-
-    await deleteTasks(tasksList);
+    await Promise.all([deleteActiveTask(), deleteTasks(tasksList)]);
     setTasksList([]);
+    setTaskTitleHeading("Time to focus now");
   };
 
   const deleteTasks = async (tasks) => {

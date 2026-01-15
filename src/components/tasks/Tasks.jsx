@@ -11,6 +11,7 @@ import { useAllTasksEdit } from "../hooks/useAllTasksEdit.js";
 
 const Tasks = ({
   taskTitleHeading,
+  setTaskTitleHeading,
   tasksList,
   setTasksList,
   onTaskCheck,
@@ -43,7 +44,7 @@ const Tasks = ({
     onClearAllTasks,
     onAllTasksSectionEdit,
     allTasksEditSectionModalRef,
-  } = useAllTasksEdit(tasksList, setTasksList);
+  } = useAllTasksEdit(tasksList, setTasksList, setTaskTitleHeading);
 
   return (
     <div className="">

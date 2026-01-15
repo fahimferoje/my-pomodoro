@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
-import { addTask, getAllTasks, updateTask } from "../../db/indexedDb.js";
+import {
+  addTask,
+  getAllTasks,
+  updateTask,
+  addActiveTask,
+  updateActiveTask,
+  getActiveTask,
+} from "../../db/indexedDb.js";
 
 export const useTasks = () => {
   const [taskRowData, setTaskRowData] = useState({
@@ -15,7 +22,6 @@ export const useTasks = () => {
   const [tasksList, setTasksList] = useState([]);
 
   const [taskTitleHeading, setTaskTitleHeading] = useState("Time to focus!");
-  const [activeTask, setActiveTask] = useState(null);
 
   const [showAddTaskButton, setShowAddTaskButton] = useState(true);
 
@@ -27,7 +33,14 @@ export const useTasks = () => {
   });
 
   useEffect(() => {
+    console.log("running effect");
     getAllTasks().then(setTasksList);
+    getActiveTask()
+      .then((res) => setTaskTitleHeading(res.taskName))
+      .catch((err) => {
+        setTaskTitleHeading("Time to focus");
+        console.error("Failed to fetch active task" + err);
+      });
   }, []);
 
   const onAddTaskButtonClick = () => {
@@ -75,11 +88,6 @@ export const useTasks = () => {
       return;
     }
 
-    if (activeTask === null) {
-      setTaskTitleHeading(taskRowData.taskName);
-      setActiveTask(taskRowData);
-    }
-
     //edit mode
     if (
       addTaskPopUpMode.mode === EDIT &&
@@ -95,7 +103,7 @@ export const useTasks = () => {
       );
 
       setTaskTitleHeading(updatedTask.taskName);
-      setActiveTask(updatedTask);
+      updateActiveTask(updatedTask);
 
       setAddTaskPopUpMode((prev) => {
         return {
@@ -121,11 +129,14 @@ export const useTasks = () => {
       ...newTask,
     };
 
-    setTasksList((prev) =>
-      prev.map((task) =>
-        task.id === persistedNewTask.id ? persistedNewTask : task
-      )
-    );
+    const activeTask = await getActiveTask();
+
+    if (!activeTask) {
+      await addActiveTask(persistedNewTask);
+      setTaskTitleHeading(persistedNewTask.taskName);
+    }
+
+    setTasksList((prev) => [...prev, persistedNewTask]);
 
     setTaskRowData((prevState) => {
       return {
@@ -160,9 +171,9 @@ export const useTasks = () => {
     );
   };
 
-  const onTaskNameClick = (task) => {
+  const onTaskNameClick = async (task) => {
+    await updateActiveTask(task);
     setTaskTitleHeading(task.taskName);
-    setActiveTask(task);
   };
 
   const onTaskEdit = (task) => {
@@ -183,11 +194,10 @@ export const useTasks = () => {
 
   return {
     taskTitleHeading,
+    setTaskTitleHeading,
     tasksList,
     taskRowData,
-    activeTask,
     setTaskRowData,
-    setActiveTask,
     onAddTaskButtonClick,
     onCancel,
     onSave,

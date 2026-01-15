@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 
-export const dbPromise = openDB("pomodoro", 2, {
+export const dbPromise = openDB("pomodoro", 4, {
   upgrade(db) {
     if (!db.objectStoreNames.contains("tasks")) {
       const store = db.createObjectStore("tasks", {
@@ -9,6 +9,10 @@ export const dbPromise = openDB("pomodoro", 2, {
       });
 
       store.createIndex("taskId", "id");
+    }
+
+    if (!db.objectStoreNames.contains("activeTask")) {
+      db.createObjectStore("activeTask");
     }
   },
 });
@@ -32,4 +36,25 @@ export async function updateTask(task) {
 export async function deleteTask(id) {
   const db = await dbPromise;
   return db.delete("tasks", id);
+}
+
+export async function addActiveTask(task) {
+  const db = await dbPromise;
+
+  return db.add("activeTask", task, "active_task");
+}
+
+export async function updateActiveTask(task) {
+  const db = await dbPromise;
+  return db.put("activeTask", task, "active_task");
+}
+
+export async function getActiveTask() {
+  const db = await dbPromise;
+  return db.get("activeTask", "active_task");
+}
+
+export async function deleteActiveTask() {
+  const db = await dbPromise;
+  return db.delete("activeTask", "active_task");
 }
