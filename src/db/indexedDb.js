@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 
-export const dbPromise = openDB("pomodoro", 4, {
+export const dbPromise = openDB("pomodoro", 5, {
   upgrade(db) {
     if (!db.objectStoreNames.contains("tasks")) {
       const store = db.createObjectStore("tasks", {
@@ -13,6 +13,14 @@ export const dbPromise = openDB("pomodoro", 4, {
 
     if (!db.objectStoreNames.contains("activeTask")) {
       db.createObjectStore("activeTask");
+    }
+
+    if (!db.objectStoreNames.contains("settings")) {
+      const store = db.createObjectStore("settings", {
+        keyPath: "key",
+      });
+
+      store.createIndex("settings_key", "key");
     }
   },
 });
