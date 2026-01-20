@@ -4,6 +4,7 @@ import TotalCompletedPomodorosCount from "./TotalCompletedPomodorosCount.jsx";
 import Tasks from "../tasks/Tasks.jsx";
 import { usePomodoroTimer } from "../hooks/usePomodoroTimer.js";
 import { useState } from "react";
+import Header from "./Header.jsx";
 
 const PomodoroController = () => {
   const [tasksList, setTasksList] = useState([]);
@@ -15,6 +16,7 @@ const PomodoroController = () => {
     <div
       className={`flex items-center min-h-dvh flex-col ${timerMode.typography.themeColor} `}
     >
+      <Header />
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
         <div className="flex flex-col pt-6">
           <Tabs active={timerMode.id} onTabClick={onTabClick} />
