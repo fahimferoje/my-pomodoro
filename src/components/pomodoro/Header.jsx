@@ -11,11 +11,8 @@ const Header = () => {
       <h1 className="basis-3/4 text-xl font-medium text-white ml-2">
         Pomofocus
       </h1>
-      <div className="basis-1/4 flex flex-row items-center bg-white rounded-md">
-        <FontAwesomeIcon
-          className={`cursor-pointer text-md text-white`}
-          icon={faGear}
-        />
+      <div className="basis-1/4 flex flex-row items-center bg-white/40 rounded-md text-white">
+        <FontAwesomeIcon className={`cursor-pointer text-md`} icon={faGear} />
         <button className="ml-2 text-right">Settings</button>
       </div>
     </div>
