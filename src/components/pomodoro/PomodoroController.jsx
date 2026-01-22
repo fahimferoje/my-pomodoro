@@ -6,21 +6,39 @@ import { usePomodoroTimer } from "../hooks/usePomodoroTimer.js";
 import { useState } from "react";
 import Header from "./Header.jsx";
 import SettingsModal from "../settings/SettingsModal.jsx";
+import { Mode } from "../constants/PomodoroMode.js";
 
 const PomodoroController = () => {
   const [tasksList, setTasksList] = useState([]);
 
-  const { onComplete, onTabClick, totalCompletedPomodoros, timerMode } =
-    usePomodoroTimer(setTasksList);
+  const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
 
-  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [modes, setModes] = useState(Mode);
+
+  const [timerMode, setTimerMode] = useState(modes.POMODORO);
+
+  const { onComplete, onTabClick, totalCompletedPomodoros } = usePomodoroTimer(
+    setTasksList,
+    timerMode,
+    setTimerMode,
+  );
+
+  const [showSettingsModal, setShowSettingsModal] = useState(true);
 
   return (
     <div
       className={`flex items-center min-h-dvh flex-col ${timerMode.typography.themeColor} `}
     >
       <Header />
-      <SettingsModal />
+      {showSettingsModal && (
+        <SettingsModal
+          timerMode={timerMode}
+          setTimerMode={setTimerMode}
+          setShowSettingsModal={setShowSettingsModal}
+          modes={modes}
+          setModes={setModes}
+        />
+      )}
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
         <div className="flex flex-col pt-6">
           <Tabs active={timerMode.id} onTabClick={onTabClick} />

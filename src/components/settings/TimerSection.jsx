@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import TimerInputBox from "./TimerInputBox";
 
-const TimerSection = () => {
+const TimerSection = ({ timerMode }) => {
   return (
     <div className="flex flex-col w-md">
       <div className="flex w-md h-16 pl-2 items-center">

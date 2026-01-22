@@ -1,6 +1,37 @@
+import { useEffect } from "react";
 import TimerSection from "./TimerSection";
+import { getAllSettings } from "../../db/indexedDb";
+import { Mode } from "../constants/PomodoroMode.js";
 
-const SettingsModal = ({ onClose }) => {
+const SettingsModal = ({
+  timerMode,
+  setTimerMode,
+  setShowSettingsModal,
+  modes,
+  setModes,
+}) => {
+  const onSave = async () => {};
+
+  useEffect(() => {
+    getAllSettings()
+      .then((res) =>
+        setModes((prev) => {
+          return {
+            ...prev,
+            [timerMode]: {
+              ...prev[timerMode],
+              time: 10,
+            },
+          };
+        }),
+      )
+      .catch((err) => console.log(err));
+  }, []);
+
+  const onClose = () => {
+    setShowSettingsModal(false);
+  };
+
   return (
     <div
       className={`absolute bg-white rounded shadow-lg w-md h- 
@@ -19,8 +50,17 @@ const SettingsModal = ({ onClose }) => {
             ✕
           </button>
         </div>
-        <TimerSection />
+        <TimerSection timerMode={timerMode} />
       </div>
+      <button
+        className="ml-80 mt-60 bg-[#45474b] font-semibold rounded-[9px] 
+        cursor-pointer hover:bg-[#535356] 
+        px-4 text-[14px] text-white min-h-9 
+          min-w-[74px]"
+        onClick={onSave}
+      >
+        Save
+      </button>
     </div>
   );
 };

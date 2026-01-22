@@ -66,3 +66,8 @@ export async function deleteActiveTask() {
   const db = await dbPromise;
   return db.delete("activeTask", "active_task");
 }
+
+export async function getAllSettings() {
+  const db = await dbPromise;
+  return db.getAll("settings");
+}
