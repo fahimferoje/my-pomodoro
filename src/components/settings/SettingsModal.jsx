@@ -7,26 +7,10 @@ const SettingsModal = ({
   timerMode,
   setTimerMode,
   setShowSettingsModal,
-  modes,
-  setModes,
+  stageSeconds,
+  setStageSeconds,
 }) => {
   const onSave = async () => {};
-
-  useEffect(() => {
-    getAllSettings()
-      .then((res) =>
-        setModes((prev) => {
-          return {
-            ...prev,
-            [timerMode]: {
-              ...prev[timerMode],
-              time: 10,
-            },
-          };
-        }),
-      )
-      .catch((err) => console.log(err));
-  }, []);
 
   const onClose = () => {
     setShowSettingsModal(false);
@@ -50,7 +34,7 @@ const SettingsModal = ({
             ✕
           </button>
         </div>
-        <TimerSection timerMode={timerMode} />
+        <TimerSection stageSeconds={stageSeconds} timerMode={timerMode} />
       </div>
       <button
         className="ml-80 mt-60 bg-[#45474b] font-semibold rounded-[9px] 

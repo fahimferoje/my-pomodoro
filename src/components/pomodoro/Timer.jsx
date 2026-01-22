@@ -1,9 +1,10 @@
 import { useCountDownTimer } from "../hooks/useCountDownTimer.js";
 
-const Timer = ({ mode, onComplete }) => {
+const Timer = ({ stageSeconds, mode, onComplete }) => {
   const { timeLeft, toggleTimer, isRunning } = useCountDownTimer(
+    stageSeconds,
     mode,
-    onComplete
+    onComplete,
   );
 
   return (

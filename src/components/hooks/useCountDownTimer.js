@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 
-export const useCountDownTimer = (mode, onComplete) => {
-  const [timeLeft, setTimeLeft] = useState(mode.time);
+export const useCountDownTimer = (stageSeconds, mode, onComplete) => {
+  const [timeLeft, setTimeLeft] = useState(stageSeconds[mode.id]);
   const [isRunning, setIsRunning] = useState(false);
 
   const timerRef = useRef(null);
