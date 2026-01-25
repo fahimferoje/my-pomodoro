@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const TimerInputBox = ({
+  id,
   title,
   onValueChange,
   onIncrement,
@@ -16,18 +17,18 @@ const TimerInputBox = ({
           className="w-24 bg-gray-200"
           type="text"
           value={time}
-          onChange={onValueChange}
+          onChange={() => onValueChange(id)}
         />
         <div className="flex flex-col absolute ml-20 p-0">
           <FontAwesomeIcon
             className={`cursor-pointer text-sm p-0`}
             icon={faCaretUp}
-            onClick={onIncrement}
+            onClick={() => onIncrement(id)}
           />
           <FontAwesomeIcon
             className={`cursor-pointer text-sm p-0`}
             icon={faCaretDown}
-            onClick={onDecrement}
+            onClick={() => onDecrement(id)}
           />
         </div>
       </div>

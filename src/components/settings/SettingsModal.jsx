@@ -34,7 +34,11 @@ const SettingsModal = ({
             ✕
           </button>
         </div>
-        <TimerSection stageSeconds={stageSeconds} timerMode={timerMode} />
+        <TimerSection
+          stageSeconds={stageSeconds}
+          setStageSeconds={setStageSeconds}
+          timerMode={timerMode}
+        />
       </div>
       <button
         className="ml-80 mt-60 bg-[#45474b] font-semibold rounded-[9px] 
