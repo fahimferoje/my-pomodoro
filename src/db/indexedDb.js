@@ -1,6 +1,6 @@
 import { openDB } from "idb";
 
-export const dbPromise = openDB("pomodoro", 5, {
+export const dbPromise = openDB("pomodoro", 7, {
   upgrade(db) {
     if (!db.objectStoreNames.contains("tasks")) {
       const store = db.createObjectStore("tasks", {
@@ -16,11 +16,9 @@ export const dbPromise = openDB("pomodoro", 5, {
     }
 
     if (!db.objectStoreNames.contains("settings")) {
-      const store = db.createObjectStore("settings", {
+      db.createObjectStore("settings", {
         keyPath: "key",
       });
-
-      store.createIndex("settings_key", "key");
     }
   },
 });
@@ -67,14 +65,15 @@ export async function deleteActiveTask() {
   return db.delete("activeTask", "active_task");
 }
 
-export async function getAllSettings() {
+export async function getStageSeconds() {
   const db = await dbPromise;
-  return db.getAll("settings");
+  const result = await db.get("settings", "stageSeconds");
+  return result ? result.value : [];
 }
 
 export async function addStageSecondsSettings(stageSeconds) {
   const db = await dbPromise;
-  return db.add("settings", {
+  return db.put("settings", {
     key: "stageSeconds",
     value: stageSeconds,
   });

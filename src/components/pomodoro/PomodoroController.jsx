@@ -7,23 +7,21 @@ import { useState, useEffect } from "react";
 import Header from "./Header.jsx";
 import SettingsModal from "../settings/SettingsModal.jsx";
 import { Mode } from "../constants/PomodoroMode.js";
-import { getAllSettings } from "../../db/indexedDb.js";
+import { getStageSeconds } from "../../db/indexedDb.js";
 
 const PomodoroController = () => {
   const [tasksList, setTasksList] = useState([]);
 
-  const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
+  const { POMODORO } = Mode;
 
   const [timerMode, setTimerMode] = useState(POMODORO);
 
   const [stageSeconds, setStageSeconds] = useState([]);
 
   useEffect(() => {
-    getAllSettings()
+    getStageSeconds()
       .then((res) => {
-        if (res.length === 0) {
-          setStageSeconds([5, 10, 5]);
-        }
+        setStageSeconds(res.length !== 0 ? res : [5, 10, 5]);
       })
       .catch((err) => console.log(err));
   }, []);

@@ -1,18 +1,9 @@
-import { Mode } from "../constants/PomodoroMode.js";
 import { useState, useEffect } from "react";
-import {
-  getActiveTask,
-  updateActiveTask,
-  getAllSettings,
-} from "../../db/indexedDb.js";
+import { getActiveTask, updateActiveTask } from "../../db/indexedDb.js";
 
 const MAX_POMODORO_SESSION_COUNT = 3;
 
 export const usePomodoroTimer = (setTasksList, timerMode, setTimerMode) => {
-  // const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
-
-  // const [timerMode, setTimerMode] = useState(POMODORO);
-
   const [totalCompletedPomodoros, setTotalCompletedPomodoros] = useState(1);
 
   const [completedPomodoros, setCompletedPomodoros] = useState(1);
@@ -69,6 +60,5 @@ export const usePomodoroTimer = (setTasksList, timerMode, setTimerMode) => {
     onComplete,
     onTabClick,
     totalCompletedPomodoros,
-    // timerMode,
   };
 };
