@@ -1,16 +1,19 @@
-import { useEffect } from "react";
 import TimerSection from "./TimerSection";
-import { getAllSettings } from "../../db/indexedDb";
-import { Mode } from "../constants/PomodoroMode.js";
+import { addStageSecondsSettings } from "../../db/indexedDb";
 
 const SettingsModal = ({
-  timerMode,
-  setTimerMode,
   setShowSettingsModal,
   stageSeconds,
   setStageSeconds,
 }) => {
-  const onSave = async () => {};
+  const onSave = async () => {
+    try {
+      await addStageSecondsSettings(stageSeconds);
+      setShowSettingsModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onClose = () => {
     setShowSettingsModal(false);
@@ -37,7 +40,6 @@ const SettingsModal = ({
         <TimerSection
           stageSeconds={stageSeconds}
           setStageSeconds={setStageSeconds}
-          timerMode={timerMode}
         />
       </div>
       <button

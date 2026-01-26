@@ -71,3 +71,11 @@ export async function getAllSettings() {
   const db = await dbPromise;
   return db.getAll("settings");
 }
+
+export async function addStageSecondsSettings(stageSeconds) {
+  const db = await dbPromise;
+  return db.add("settings", {
+    key: "stageSeconds",
+    value: stageSeconds,
+  });
+}

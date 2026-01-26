@@ -14,8 +14,6 @@ const PomodoroController = () => {
 
   const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
 
-  //const [modes, setModes] = useState(Mode);
-
   const [timerMode, setTimerMode] = useState(POMODORO);
 
   const [stageSeconds, setStageSeconds] = useState([]);
@@ -45,8 +43,6 @@ const PomodoroController = () => {
       <Header />
       {showSettingsModal && (
         <SettingsModal
-          timerMode={timerMode}
-          setTimerMode={setTimerMode}
           setShowSettingsModal={setShowSettingsModal}
           stageSeconds={stageSeconds}
           setStageSeconds={setStageSeconds}

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import TimerInputBox from "./TimerInputBox";
 
-const TimerSection = ({ stageSeconds, setStageSeconds, timerMode }) => {
+const TimerSection = ({ stageSeconds, setStageSeconds }) => {
   const STAGE_INDEX = {
     pomodoro: 0,
     short_break: 1,
