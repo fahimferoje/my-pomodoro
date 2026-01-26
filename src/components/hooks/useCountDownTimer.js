@@ -19,7 +19,7 @@ export const useCountDownTimer = (stageSeconds, mode, onComplete) => {
   useEffect(() => {
     isTimerFinishedRef.current = false;
     clearInterval(timerRef.current);
-    setTimeLeft(mode.time);
+    setTimeLeft(stageSeconds[mode.id]);
     setIsRunning(false);
   }, [mode]);
 

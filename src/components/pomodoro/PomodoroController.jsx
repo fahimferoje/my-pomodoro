@@ -16,14 +16,19 @@ const PomodoroController = () => {
 
   const [timerMode, setTimerMode] = useState(POMODORO);
 
-  const [stageSeconds, setStageSeconds] = useState([]);
+  const [stageSeconds, setStageSeconds] = useState(null);
 
   useEffect(() => {
-    getStageSeconds()
-      .then((res) => {
-        setStageSeconds(res.length !== 0 ? res : [5, 10, 5]);
-      })
-      .catch((err) => console.log(err));
+    const fetchStageSeconds = async () => {
+      try {
+        const res = await getStageSeconds();
+        setStageSeconds(res.length !== 0 ? res : [1, 10, 1]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchStageSeconds();
   }, []);
 
   const { onComplete, onTabClick, totalCompletedPomodoros } = usePomodoroTimer(
@@ -32,13 +37,22 @@ const PomodoroController = () => {
     setTimerMode,
   );
 
-  const [showSettingsModal, setShowSettingsModal] = useState(true);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+
+  const onSettingsClick = async () => {
+    setShowSettingsModal(true);
+  };
+
+  if (stageSeconds === null) {
+    // data not loaded yet
+    return <div>Loading...</div>;
+  }
 
   return (
     <div
       className={`flex items-center min-h-dvh flex-col ${timerMode.typography.themeColor} `}
     >
-      <Header />
+      <Header onSettingsClick={onSettingsClick} />
       {showSettingsModal && (
         <SettingsModal
           setShowSettingsModal={setShowSettingsModal}

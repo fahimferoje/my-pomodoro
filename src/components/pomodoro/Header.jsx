@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faGear } from "@fortawesome/free-solid-svg-icons";
 
-const Header = () => {
+const Header = ({ onSettingsClick }) => {
   return (
     <div className="flex w-md h-16 pl-2 items-center">
       <FontAwesomeIcon
@@ -13,7 +13,9 @@ const Header = () => {
       </h1>
       <div className="basis-1/4 flex flex-row items-center bg-white/40 rounded-md text-white">
         <FontAwesomeIcon className={`cursor-pointer text-md`} icon={faGear} />
-        <button className="ml-2 text-right">Settings</button>
+        <button onClick={onSettingsClick} className="ml-2 text-right">
+          Settings
+        </button>
       </div>
     </div>
   );
