@@ -9,6 +9,7 @@ const SettingsModal = ({
   const onSave = async () => {
     try {
       await addStageSecondsSettings(stageSeconds);
+      setStageSeconds([...stageSeconds]);
       setShowSettingsModal(false);
     } catch (error) {
       console.log(error);
