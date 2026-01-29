@@ -1,24 +1,16 @@
 import TimerSection from "./TimerSection";
-import { addStageSecondsSettings } from "../../db/indexedDb";
+import { useSettings } from "../hooks/useSettings.js";
 
 const SettingsModal = ({
   setShowSettingsModal,
   stageSeconds,
   setStageSeconds,
 }) => {
-  const onSave = async () => {
-    try {
-      await addStageSecondsSettings(stageSeconds);
-      setStageSeconds([...stageSeconds]);
-      setShowSettingsModal(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onClose = () => {
-    setShowSettingsModal(false);
-  };
+  const { onSave, onClose } = useSettings(
+    stageSeconds,
+    setStageSeconds,
+    setShowSettingsModal,
+  );
 
   return (
     <div
