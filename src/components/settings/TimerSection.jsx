@@ -1,44 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import TimerInputBox from "./TimerInputBox";
+import { useTimerSettings } from "../hooks/useTimerSettings.js";
 
 const TimerSection = ({ stageSeconds, setStageSeconds }) => {
-  const STAGE_INDEX = {
-    pomodoro: 0,
-    short_break: 1,
-    long_break: 2,
-  };
-
-  const onValueChange = (e, id) => {
-    setStageSeconds((prev) => {
-      const value = e.target.value;
-
-      const index = STAGE_INDEX[id];
-      if (index === undefined) return prev;
-
-      const next = [...prev];
-      next[index] = value;
-    });
-  };
-
-  const onIncrement = (id) => {
-    updateStage(id, 1);
-  };
-
-  const onDecrement = (id) => {
-    updateStage(id, -1);
-  };
-
-  const updateStage = (id, delta) => {
-    setStageSeconds((prev) => {
-      const index = STAGE_INDEX[id];
-      if (index === undefined) return prev;
-
-      const next = [...prev];
-      next[index] = Number(next[index]) + delta;
-      return next;
-    });
-  };
+  const { stages, getStageValue, onValueChange, onIncrement, onDecrement } =
+    useTimerSettings(setStageSeconds);
 
   return (
     <div className="flex flex-col w-md">
@@ -51,8 +18,7 @@ const TimerSection = ({ stageSeconds, setStageSeconds }) => {
       </div>
       <h3 className="text-lg font-medium ml-2">Time (minutes)</h3>
       <div className="flex">
-        {Object.keys(STAGE_INDEX).map((stageSec) => {
-          console.log(stageSec);
+        {stages.map((stageSec) => {
           return (
             <TimerInputBox
               title={`${stageSec}`}
@@ -60,7 +26,7 @@ const TimerSection = ({ stageSeconds, setStageSeconds }) => {
               onChange={onValueChange}
               onIncrement={onIncrement}
               onDecrement={onDecrement}
-              time={stageSeconds[STAGE_INDEX[stageSec]]}
+              time={getStageValue(stageSec, stageSeconds)}
             />
           );
         })}
