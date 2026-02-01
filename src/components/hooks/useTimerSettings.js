@@ -5,15 +5,19 @@ export const useTimerSettings = (setStageSeconds) => {
     long_break: 2,
   };
 
-  const onValueChange = (e, id) => {
-    setStageSeconds((prev) => {
-      const value = e.target.value;
+  const onValueChange = (value, id) => {
+    const inputValue = parseInt(value);
 
+    if (!inputValue) {
+      return;
+    }
+
+    setStageSeconds((prev) => {
       const index = STAGE_INDEX[id];
       if (index === undefined) return prev;
 
       const next = [...prev];
-      next[index] = value;
+      next[index] = inputValue;
 
       return next;
     });

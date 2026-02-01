@@ -23,7 +23,7 @@ const TimerSection = ({ stageSeconds, setStageSeconds }) => {
             <TimerInputBox
               title={`${stageSec}`}
               id={`${stageSec}`}
-              onChange={onValueChange}
+              onValueChange={onValueChange}
               onIncrement={onIncrement}
               onDecrement={onDecrement}
               time={getStageValue(stageSec, stageSeconds)}

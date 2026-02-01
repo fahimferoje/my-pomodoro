@@ -17,7 +17,7 @@ const TimerInputBox = ({
           className="w-24 bg-gray-200"
           type="text"
           value={time}
-          onChange={() => onValueChange(id)}
+          onChange={(e) => onValueChange(e.target.value, id)}
         />
         <div className="flex flex-col absolute ml-20 p-0">
           <FontAwesomeIcon
