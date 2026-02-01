@@ -78,3 +78,11 @@ export async function addStageSecondsSettings(stageSeconds) {
     value: stageSeconds,
   });
 }
+
+export async function addLongBreakInterval(longBreakInterval) {
+  const db = await dbPromise;
+  return db.put("settings", {
+    key: "longBreakInterval",
+    value: longBreakInterval,
+  });
+}

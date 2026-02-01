@@ -18,6 +18,8 @@ const PomodoroController = () => {
 
   const [stageSeconds, setStageSeconds] = useState(null);
 
+  const [longBreakInterval, setLongBreakInterval] = useState(4);
+
   useEffect(() => {
     const fetchStageSeconds = async () => {
       try {
@@ -58,6 +60,8 @@ const PomodoroController = () => {
           setShowSettingsModal={setShowSettingsModal}
           stageSeconds={stageSeconds}
           setStageSeconds={setStageSeconds}
+          longBreakInterval={longBreakInterval}
+          setLongBreakInterval={setLongBreakInterval}
         />
       )}
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>

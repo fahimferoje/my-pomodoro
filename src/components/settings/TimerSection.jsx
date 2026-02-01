@@ -1,9 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import TimerInputBox from "./TimerInputBox";
+import LongBreakSection from "./LongBreakSection.jsx";
 import { useTimerSettings } from "../hooks/useTimerSettings.js";
 
-const TimerSection = ({ stageSeconds, setStageSeconds }) => {
+const TimerSection = ({
+  stageSeconds,
+  setStageSeconds,
+  longBreakInterval,
+  setLongBreakInterval,
+}) => {
   const { stages, getStageValue, onValueChange, onIncrement, onDecrement } =
     useTimerSettings(setStageSeconds);
 
@@ -30,6 +36,9 @@ const TimerSection = ({ stageSeconds, setStageSeconds }) => {
             />
           );
         })}
+      </div>
+      <div>
+        <LongBreakSection />
       </div>
     </div>
   );

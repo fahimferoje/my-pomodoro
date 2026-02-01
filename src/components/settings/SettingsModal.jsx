@@ -5,11 +5,15 @@ const SettingsModal = ({
   setShowSettingsModal,
   stageSeconds,
   setStageSeconds,
+  longBreakInterval,
+  setLongBreakInterval,
 }) => {
   const { onSave, onClose } = useSettings(
     stageSeconds,
     setStageSeconds,
     setShowSettingsModal,
+    longBreakInterval,
+    setLongBreakInterval,
   );
 
   return (
@@ -33,10 +37,12 @@ const SettingsModal = ({
         <TimerSection
           stageSeconds={stageSeconds}
           setStageSeconds={setStageSeconds}
+          longBreakInterval={longBreakInterval}
+          setLongBreakInterval={setLongBreakInterval}
         />
       </div>
       <button
-        className="ml-80 mt-60 bg-[#45474b] font-semibold rounded-[9px] 
+        className="ml-80 mt-45 bg-[#45474b] font-semibold rounded-[9px] 
         cursor-pointer hover:bg-[#535356] 
         px-4 text-[14px] text-white min-h-9 
           min-w-[74px]"
