@@ -3,7 +3,7 @@ import { faCircleCheck, faGear } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ onSettingsClick }) => {
   return (
-    <div className="flex w-md h-16 pl-2 items-center">
+    <div className="flex w-md h-16 pl-2 items-center cursor-pointer">
       <FontAwesomeIcon
         className={`cursor-pointer text-2xl text-white`}
         icon={faCircleCheck}

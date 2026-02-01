@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { useLongBreakSettings } from "../hooks/useLongBreakSettings";
 
-const LongBreakSection = ({ longBreakInterval }) => {
-  const onValueChange = () => {};
-
-  const onIncrement = () => {};
-  const onDecrement = () => {};
+const LongBreakSection = ({ longBreakInterval, setLongBreakInterval }) => {
+  const { onValueChange, onIncrement, onDecrement } =
+    useLongBreakSettings(setLongBreakInterval);
 
   return (
     <div className="flex w-md mt-4">

@@ -86,3 +86,9 @@ export async function addLongBreakInterval(longBreakInterval) {
     value: longBreakInterval,
   });
 }
+
+export async function getLongBreakInterval() {
+  const db = await dbPromise;
+  const result = await db.get("settings", "longBreakInterval");
+  return result ? result.value : null;
+}
