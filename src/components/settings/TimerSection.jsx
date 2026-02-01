@@ -38,7 +38,7 @@ const TimerSection = ({
         })}
       </div>
       <div>
-        <LongBreakSection />
+        <LongBreakSection longBreakInterval={longBreakInterval} />
       </div>
     </div>
   );

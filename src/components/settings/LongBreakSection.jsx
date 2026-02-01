@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-const LongBreakSection = () => {
+const LongBreakSection = ({ longBreakInterval }) => {
   const onValueChange = () => {};
 
   const onIncrement = () => {};
@@ -16,7 +16,7 @@ const LongBreakSection = () => {
         <input
           className="w-24 bg-gray-200"
           type="text"
-          value={4}
+          value={longBreakInterval}
           onChange={(e) => onValueChange(e.target.value)}
         />
         <div className="flex flex-col absolute ml-20 p-0 -mt-6">
