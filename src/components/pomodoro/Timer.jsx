@@ -1,10 +1,11 @@
 import { useCountDownTimer } from "../hooks/useCountDownTimer.js";
 
-const Timer = ({ stageSeconds, mode, onComplete }) => {
+const Timer = ({ stageSeconds, mode, onComplete, setProgressBarValue }) => {
   const { timeLeft, toggleTimer, isRunning } = useCountDownTimer(
     stageSeconds,
     mode,
     onComplete,
+    setProgressBarValue,
   );
 
   return (
@@ -17,7 +18,7 @@ const Timer = ({ stageSeconds, mode, onComplete }) => {
       </h1>
       <button
         className={`bg-white w-40 ${mode.typography.fontColor} 
-         p-3 rounded-md font-bold mt-6 text-xl`}
+         p-3 rounded-md font-bold mt-6 text-xl cursor-pointer`}
         onClick={toggleTimer}
       >
         {isRunning ? "PAUSE" : "START"}

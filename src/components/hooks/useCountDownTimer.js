@@ -1,6 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 
-export const useCountDownTimer = (stageSeconds, mode, onComplete) => {
+export const useCountDownTimer = (
+  stageSeconds,
+  mode,
+  onComplete,
+  setProgressBarValue,
+) => {
   const [timeLeft, setTimeLeft] = useState(stageSeconds[mode.id]);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -20,6 +25,7 @@ export const useCountDownTimer = (stageSeconds, mode, onComplete) => {
     isTimerFinishedRef.current = false;
     clearInterval(timerRef.current);
     setTimeLeft(stageSeconds[mode.id]);
+    setProgressBarValue(0);
     setIsRunning(false);
   }, [mode, stageSeconds]);
 
@@ -32,18 +38,20 @@ export const useCountDownTimer = (stageSeconds, mode, onComplete) => {
       clearInterval(timerRef.current);
       setIsRunning(false);
     } else {
-      if (timerRef.current) {
+      if (timerRef.current && isRunning) {
         return;
       }
       timerRef.current = setInterval(() => {
         setTimeLeft((prevTimeLeft) => {
           if (prevTimeLeft <= 1) {
+            setProgressBarValue((prev) => prev + 1);
             clearInterval(timerRef.current);
             timerRef.current = null;
             return 0;
           }
           return prevTimeLeft - 1;
         });
+        setProgressBarValue((prev) => prev + 1);
       }, 1000);
       setIsRunning(true);
     }

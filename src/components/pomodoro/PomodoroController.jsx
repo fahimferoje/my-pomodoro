@@ -8,6 +8,7 @@ import Header from "./Header.jsx";
 import SettingsModal from "../settings/SettingsModal.jsx";
 import { Mode } from "../constants/PomodoroMode.js";
 import { getStageSeconds, getLongBreakInterval } from "../../db/indexedDb.js";
+import ProgressBar from "./ProgressBar.jsx";
 
 const PomodoroController = () => {
   const [tasksList, setTasksList] = useState([]);
@@ -19,6 +20,8 @@ const PomodoroController = () => {
   const [stageSeconds, setStageSeconds] = useState(null);
 
   const [longBreakInterval, setLongBreakInterval] = useState(4);
+
+  const [progressBarValue, setProgressBarValue] = useState(0);
 
   useEffect(() => {
     const fetchStageSeconds = async () => {
@@ -41,7 +44,7 @@ const PomodoroController = () => {
     setTasksList,
     timerMode,
     setTimerMode,
-    longBreakInterval
+    longBreakInterval,
   );
 
   const [showSettingsModal, setShowSettingsModal] = useState(false);
@@ -69,6 +72,10 @@ const PomodoroController = () => {
           setLongBreakInterval={setLongBreakInterval}
         />
       )}
+      <ProgressBar
+        maxValue={stageSeconds[timerMode.id]}
+        progressBarValue={progressBarValue}
+      />
       <div className={`bg-white/15 rounded-lg w-md h-80 mt-30 text-white`}>
         <div className="flex flex-col pt-6">
           <Tabs active={timerMode.id} onTabClick={onTabClick} />
@@ -78,6 +85,7 @@ const PomodoroController = () => {
             stageSeconds={stageSeconds}
             mode={timerMode}
             onComplete={onComplete}
+            setProgressBarValue={setProgressBarValue}
           />
         </div>
       </div>
