@@ -91,7 +91,6 @@ export const usePomodoroTimer = () => {
     stageSeconds,
     setStageSeconds,
     timerMode,
-    setTimerMode,
     longBreakInterval,
     setLongBreakInterval,
     progressBarValue,

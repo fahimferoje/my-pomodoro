@@ -3,7 +3,7 @@ import Tabs from "./Tabs";
 import TotalCompletedPomodorosCount from "./TotalCompletedPomodorosCount.jsx";
 import Tasks from "../tasks/Tasks.jsx";
 import { usePomodoroTimer } from "../hooks/usePomodoroTimer.js";
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import Header from "./Header.jsx";
 import SettingsModal from "../settings/SettingsModal.jsx";
 import ProgressBar from "./ProgressBar.jsx";
@@ -14,7 +14,6 @@ const PomodoroController = () => {
     setTasksList,
     stageSeconds,
     timerMode,
-    setTimerMode,
     setStageSeconds,
     progressBarValue,
     setProgressBarValue,
@@ -25,9 +24,9 @@ const PomodoroController = () => {
 
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
-  const onSettingsClick = async () => {
+  const onSettingsClick = useCallback(() => {
     setShowSettingsModal(true);
-  };
+  }, []);
 
   if (stageSeconds === null) {
     // data not loaded yet
