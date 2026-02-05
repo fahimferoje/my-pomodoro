@@ -1,6 +1,7 @@
+import { memo } from "react";
 import { Mode } from "../constants/PomodoroMode.js";
 
-export default function Tabs({ active, onTabClick }) {
+const Tabs = memo(({ active, onTabClick }) => {
   return (
     <div className="flex gap-3 p-2 rounded-2xl w-fit mx-auto">
       {Object.values(Mode).map((tab) => (
@@ -17,4 +18,6 @@ export default function Tabs({ active, onTabClick }) {
       ))}
     </div>
   );
-}
+});
+
+export default Tabs;

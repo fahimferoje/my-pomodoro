@@ -20,6 +20,8 @@ const PomodoroController = () => {
     onComplete,
     onTabClick,
     totalCompletedPomodoros,
+    longBreakInterval,
+    setLongBreakInterval,
   } = usePomodoroTimer();
 
   const [showSettingsModal, setShowSettingsModal] = useState(false);

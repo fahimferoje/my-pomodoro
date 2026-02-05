@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faGear } from "@fortawesome/free-solid-svg-icons";
+import { memo } from "react";
 
-const Header = ({ onSettingsClick }) => {
+const Header = memo(({ onSettingsClick }) => {
   return (
     <div className="flex w-md h-16 pl-2 items-center cursor-pointer">
       <FontAwesomeIcon
@@ -19,6 +20,6 @@ const Header = ({ onSettingsClick }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Header;

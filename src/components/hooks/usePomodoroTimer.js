@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getActiveTask, updateActiveTask } from "../../db/indexedDb.js";
 import { Mode } from "../constants/PomodoroMode.js";
 import { getStageSeconds, getLongBreakInterval } from "../../db/indexedDb.js";
@@ -81,9 +81,9 @@ export const usePomodoroTimer = () => {
     }
   };
 
-  const onTabClick = (mode) => {
+  const onTabClick = useCallback((mode) => {
     setTimerMode(mode);
-  };
+  }, []);
 
   return {
     tasksList,
