@@ -6,46 +6,22 @@ import { usePomodoroTimer } from "../hooks/usePomodoroTimer.js";
 import { useState, useEffect } from "react";
 import Header from "./Header.jsx";
 import SettingsModal from "../settings/SettingsModal.jsx";
-import { Mode } from "../constants/PomodoroMode.js";
-import { getStageSeconds, getLongBreakInterval } from "../../db/indexedDb.js";
 import ProgressBar from "./ProgressBar.jsx";
 
 const PomodoroController = () => {
-  const [tasksList, setTasksList] = useState([]);
-
-  const { POMODORO } = Mode;
-
-  const [timerMode, setTimerMode] = useState(POMODORO);
-
-  const [stageSeconds, setStageSeconds] = useState(null);
-
-  const [longBreakInterval, setLongBreakInterval] = useState(4);
-
-  const [progressBarValue, setProgressBarValue] = useState(0);
-
-  useEffect(() => {
-    const fetchStageSeconds = async () => {
-      try {
-        const [stageSecRes, longIntervalRes] = await Promise.all([
-          getStageSeconds(),
-          getLongBreakInterval(),
-        ]);
-        setStageSeconds(stageSecRes.length !== 0 ? stageSecRes : [1, 10, 1]);
-        setLongBreakInterval(longIntervalRes ? longIntervalRes : 4);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchStageSeconds();
-  }, []);
-
-  const { onComplete, onTabClick, totalCompletedPomodoros } = usePomodoroTimer(
+  const {
+    tasksList,
     setTasksList,
+    stageSeconds,
     timerMode,
     setTimerMode,
-    longBreakInterval,
-  );
+    setStageSeconds,
+    progressBarValue,
+    setProgressBarValue,
+    onComplete,
+    onTabClick,
+    totalCompletedPomodoros,
+  } = usePomodoroTimer();
 
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 

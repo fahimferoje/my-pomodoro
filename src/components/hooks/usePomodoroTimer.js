@@ -1,20 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getActiveTask, updateActiveTask } from "../../db/indexedDb.js";
 import { Mode } from "../constants/PomodoroMode.js";
+import { getStageSeconds, getLongBreakInterval } from "../../db/indexedDb.js";
 
-//const MAX_POMODORO_SESSION_COUNT = 3;
+export const usePomodoroTimer = () => {
+  const [tasksList, setTasksList] = useState([]);
 
-export const usePomodoroTimer = (
-  setTasksList,
-  timerMode,
-  setTimerMode,
-  longBreakInterval
-) => {
+  const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
+
+  const [timerMode, setTimerMode] = useState(POMODORO);
+
+  const [stageSeconds, setStageSeconds] = useState(null);
+
+  const [longBreakInterval, setLongBreakInterval] = useState(4);
+
+  const [progressBarValue, setProgressBarValue] = useState(0);
+
+  useEffect(() => {
+    const fetchStageSeconds = async () => {
+      try {
+        const [stageSecRes, longIntervalRes] = await Promise.all([
+          getStageSeconds(),
+          getLongBreakInterval(),
+        ]);
+        setStageSeconds(stageSecRes.length !== 0 ? stageSecRes : [1, 10, 1]);
+        setLongBreakInterval(longIntervalRes ? longIntervalRes : 4);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchStageSeconds();
+  }, []);
+
   const [totalCompletedPomodoros, setTotalCompletedPomodoros] = useState(1);
 
   const [completedPomodoros, setCompletedPomodoros] = useState(1);
-
-  const { POMODORO, SHORT_BREAK, LONG_BREAK } = Mode;
 
   const onComplete = async () => {
     if (completedPomodoros % longBreakInterval === 0) {
@@ -65,6 +86,16 @@ export const usePomodoroTimer = (
   };
 
   return {
+    tasksList,
+    setTasksList,
+    stageSeconds,
+    setStageSeconds,
+    timerMode,
+    setTimerMode,
+    longBreakInterval,
+    setLongBreakInterval,
+    progressBarValue,
+    setProgressBarValue,
     onComplete,
     onTabClick,
     totalCompletedPomodoros,
