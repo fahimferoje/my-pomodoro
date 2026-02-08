@@ -1,5 +1,7 @@
+import { useCallback } from "react";
+
 export const useEstimatedPomodoro = (setTaskRowData) => {
-  const onIncrement = () => {
+  const onIncrement = useCallback(() => {
     setTaskRowData((prevState) => {
       const countValue = parseInt(prevState.estimatedPomodoroCount);
 
@@ -11,9 +13,9 @@ export const useEstimatedPomodoro = (setTaskRowData) => {
         estimatedPomodoroCount: countValue + 1,
       };
     });
-  };
+  }, []);
 
-  const onDecrement = () => {
+  const onDecrement = useCallback(() => {
     setTaskRowData((prevState) => {
       const countValue = parseInt(prevState.estimatedPomodoroCount);
 
@@ -25,9 +27,9 @@ export const useEstimatedPomodoro = (setTaskRowData) => {
         estimatedPomodoroCount: countValue - 1,
       };
     });
-  };
+  }, []);
 
-  const onValueChange = (e) => {
+  const onValueChange = useCallback((e) => {
     const value = parseInt(e.target.value);
 
     setTaskRowData((prevState) => {
@@ -36,7 +38,7 @@ export const useEstimatedPomodoro = (setTaskRowData) => {
         estimatedPomodoroCount: !value ? "" : value,
       };
     });
-  };
+  }, []);
 
   return { onIncrement, onDecrement, onValueChange };
 };
