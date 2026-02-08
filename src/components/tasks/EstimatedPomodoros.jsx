@@ -1,45 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { useEstimatedPomodoro } from "../hooks/useEstimatedPomodoro";
 
 const EstimatedPomodoros = ({ setTaskRowData, estimatedPomodoroCount }) => {
-  const onIncrement = () => {
-    setTaskRowData((prevState) => {
-      const countValue = parseInt(prevState.estimatedPomodoroCount);
-
-      if (!countValue) {
-        return;
-      }
-      return {
-        ...prevState,
-        estimatedPomodoroCount: countValue + 1,
-      };
-    });
-  };
-
-  const onDecrement = () => {
-    setTaskRowData((prevState) => {
-      const countValue = parseInt(prevState.estimatedPomodoroCount);
-
-      if (!countValue) {
-        return;
-      }
-      return {
-        ...prevState,
-        estimatedPomodoroCount: countValue - 1,
-      };
-    });
-  };
-
-  const onValueChange = (e) => {
-    const value = parseInt(e.target.value);
-
-    setTaskRowData((prevState) => {
-      return {
-        ...prevState,
-        estimatedPomodoroCount: !value ? "" : value,
-      };
-    });
-  };
+  const { onIncrement, onDecrement, onValueChange } =
+    useEstimatedPomodoro(setTaskRowData);
 
   return (
     <div className="flex flex-col mt-5 ml-5">
