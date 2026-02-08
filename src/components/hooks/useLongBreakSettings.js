@@ -1,5 +1,7 @@
+import { useCallback } from "react";
+
 export const useLongBreakSettings = (setLongBreakInterval) => {
-  const onValueChange = (value) => {
+  const onValueChange = useCallback((value) => {
     const inputValue = parseInt(value);
 
     if (!inputValue || inputValue <= 0) {
@@ -7,18 +9,18 @@ export const useLongBreakSettings = (setLongBreakInterval) => {
     }
 
     setLongBreakInterval(inputValue);
-  };
+  }, []);
 
-  const onIncrement = () => {
+  const onIncrement = useCallback(() => {
     setLongBreakInterval((prev) => {
       return prev < 1 ? prev : prev + 1;
     });
-  };
-  const onDecrement = () => {
+  }, []);
+  const onDecrement = useCallback(() => {
     setLongBreakInterval((prev) => {
       return prev - 1 <= 0 ? prev : prev - 1;
     });
-  };
+  }, []);
 
   return { onValueChange, onIncrement, onDecrement };
 };

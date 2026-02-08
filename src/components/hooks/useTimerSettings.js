@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 export const useTimerSettings = (setStageSeconds) => {
   const STAGE_INDEX = {
     pomodoro: 0,
@@ -5,7 +7,7 @@ export const useTimerSettings = (setStageSeconds) => {
     long_break: 2,
   };
 
-  const onValueChange = (value, id) => {
+  const onValueChange = useCallback((value, id) => {
     const inputValue = parseInt(value);
 
     if (!inputValue) {
@@ -21,15 +23,15 @@ export const useTimerSettings = (setStageSeconds) => {
 
       return next;
     });
-  };
+  }, []);
 
-  const onIncrement = (id) => {
+  const onIncrement = useCallback((id) => {
     updateStage(id, 1);
-  };
+  }, []);
 
-  const onDecrement = (id) => {
+  const onDecrement = useCallback((id) => {
     updateStage(id, -1);
-  };
+  }, []);
 
   const updateStage = (id, delta) => {
     setStageSeconds((prev) => {

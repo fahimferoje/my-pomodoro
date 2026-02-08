@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
 import {
   addTask,
@@ -40,7 +40,7 @@ export const useTasks = (tasksList, setTasksList) => {
       });
   }, []);
 
-  const onAddTaskButtonClick = () => {
+  const onAddTaskButtonClick = useCallback(() => {
     setShowAddTaskButton(false);
 
     setAddTaskPopUpMode((prevState) => {
@@ -60,7 +60,7 @@ export const useTasks = (tasksList, setTasksList) => {
       estimatedPomodoroCount: 1,
       localPomodoroSessionCount: 0,
     });
-  };
+  }, []);
 
   const onCancel = () => {
     setShowAddTaskButton(true);
@@ -96,7 +96,7 @@ export const useTasks = (tasksList, setTasksList) => {
       await updateTask(updatedTask);
 
       setTasksList((prev) =>
-        prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+        prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
       );
 
       setTaskTitleHeading(updatedTask.taskName);
@@ -164,7 +164,7 @@ export const useTasks = (tasksList, setTasksList) => {
     await updateTask(updatedTask);
 
     setTasksList((prev) =>
-      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task)),
     );
   };
 

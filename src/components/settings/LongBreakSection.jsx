@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useLongBreakSettings } from "../hooks/useLongBreakSettings";
+import { memo } from "react";
 
-const LongBreakSection = ({ longBreakInterval, setLongBreakInterval }) => {
+const LongBreakSection = memo(({ longBreakInterval, setLongBreakInterval }) => {
   const { onValueChange, onIncrement, onDecrement } =
     useLongBreakSettings(setLongBreakInterval);
 
@@ -33,6 +34,6 @@ const LongBreakSection = ({ longBreakInterval, setLongBreakInterval }) => {
       </div>
     </div>
   );
-};
+});
 
 export default LongBreakSection;

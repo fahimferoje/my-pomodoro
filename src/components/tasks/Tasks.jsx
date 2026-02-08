@@ -5,12 +5,12 @@ import TaskRow from "./TaskRow";
 import TaskTitle from "./TaskTitle";
 import AddTaskSection from "./AddTaskSection";
 import { PopUpMode } from "../constants/AddTaskPopUpMode";
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 import AllTaskEditSectionModal from "./AllTaskEditSectionModal";
 import { useAllTasksEdit } from "../hooks/useAllTasksEdit.js";
 import { useTasks } from "../hooks/useTasks.js";
 
-const Tasks = ({ tasksList, setTasksList }) => {
+const Tasks = memo(({ tasksList, setTasksList }) => {
   const { ADD, EDIT } = PopUpMode;
 
   const {
@@ -107,6 +107,6 @@ const Tasks = ({ tasksList, setTasksList }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Tasks;
